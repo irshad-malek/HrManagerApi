@@ -72,6 +72,7 @@ namespace Hrmanagement.Repository.Repository
             }
             return result;
         }
+
         public int Update(EmployeeVm employeeVm, int EmpId)
         {
             Employee emp = new Employee();
