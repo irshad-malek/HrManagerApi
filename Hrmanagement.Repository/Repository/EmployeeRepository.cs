@@ -78,6 +78,7 @@ namespace Hrmanagement.Repository.Repository
             Employee emp = new Employee();
             if (EmpId > 0)
             {
+
                 emp = hrManagerContext.Employees.FirstOrDefault(t => t.EmpId == EmpId);
                 emp.FirstName=employeeVm.FirstName;
                 emp.LastName=employeeVm.LastName;
