@@ -52,6 +52,8 @@ namespace Hrmanagement.Repository.Repository
             emp.DesgId = employeeVm.DesgId;
             emp.EmpTypeId = employeeVm.EmpTypeId;
             emp.CId = employeeVm.CId;
+            emp.EmployeeRoleId = employeeVm.EmployeeRoleId;
+
             hrManagerContext.Employees.Add(emp);
             hrManagerContext.SaveChanges();
             return emp.EmpId;
@@ -89,6 +91,7 @@ namespace Hrmanagement.Repository.Repository
                 emp.DesgId = employeeVm.DesgId;
                 emp.Gender = employeeVm.Gender;
                 emp.EmpTypeId = employeeVm.EmpTypeId;
+                emp.EmployeeRoleId = employeeVm.EmployeeRoleId;
                 hrManagerContext.Employees.Update(emp);
                 hrManagerContext.SaveChanges();
             }
@@ -96,5 +99,19 @@ namespace Hrmanagement.Repository.Repository
 
         }
 
+        public Employee GetEmployeeById(int empId)
+        {
+            return this.hrManagerContext.Employees.Find(empId);
+        }
+        public List<CompanyVm> GetCompanyList()
+        {
+            return this.hrManagerContext.Companies.Select(x=>new CompanyVm
+            {
+                CId = x.CId,
+                CLocation=x.CLocation,
+                Name = x.Name
+                
+            }).ToList();
+        }
     }
 }

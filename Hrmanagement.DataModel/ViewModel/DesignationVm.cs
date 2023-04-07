@@ -9,5 +9,5 @@ public partial class DesignationVm
 
     public string? DesName { get; set; }
 
-    public virtual ICollection<EmployeeVm> Employees { get; } = new List<EmployeeVm>();
+    //public virtual ICollection<EmployeeVm> Employees { get; } = new List<EmployeeVm>();
 }

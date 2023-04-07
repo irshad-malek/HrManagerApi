@@ -16,6 +16,9 @@ namespace Hrmanagement.Repository.Interface
 
         int Update(EmployeeVm employeeVm,int EmpId);
 
+        Employee GetEmployeeById(int empId);
+
+        List<CompanyVm> GetCompanyList();
 
     }
 }
