@@ -12,6 +12,7 @@ namespace Hrmanagement.Repository.Interface
     {
         int save(int jId, int sId);
 
+
         int jAssignee(int empId);
 
         int sAssignee(int EmpId);

@@ -16,8 +16,7 @@ namespace HRmanagement.Controllers
         public AssigneeController(IAssignee assignee)
         {
             this.assignee = assignee;
-        }
-        
+        }    
 
         [HttpPost]
         [Route("addAssignee/{eId}/{EmpId}")]

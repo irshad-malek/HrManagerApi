@@ -14,6 +14,8 @@ namespace Hrmanagement.Repository.Repository
     {
         private readonly HrManagerContext _context;
 
+
+
         public AssigneeRepository(HrManagerContext context)
         {
             _context = context;
