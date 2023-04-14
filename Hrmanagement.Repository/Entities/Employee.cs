@@ -28,6 +28,8 @@ public partial class Employee
     public int? EmployeeRoleId { get; set; }
 
     public int? CId { get; set; }
+    public bool? IsActive { get; set; }
+
 
     public virtual ICollection<AprovedLeave> AprovedLeaves { get; } = new List<AprovedLeave>();
 

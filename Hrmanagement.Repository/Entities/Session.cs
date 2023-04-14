@@ -3,11 +3,11 @@ using System.Collections.Generic;
 
 namespace Hrmanagement.Repository.Entities;
 
-public partial class LeaveType
+public partial class Session
 {
-    public int LtId { get; set; }
+    public int SId { get; set; }
 
-    public string? LeaveTypes { get; set; }
+    public string? Sessions { get; set; }
 
     public virtual ICollection<Leave> Leaves { get; } = new List<Leave>();
 }

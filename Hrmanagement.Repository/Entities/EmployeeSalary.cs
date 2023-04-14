@@ -17,7 +17,9 @@ public partial class EmployeeSalary
 
     public decimal? Taxes { get; set; }
 
-    public int? EmpId { get; set; }
+    public int EmpId { get; set; }
+
+    public bool? IsActive { get; set; }
 
     public virtual Employee? Emp { get; set; }
 }

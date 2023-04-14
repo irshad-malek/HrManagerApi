@@ -44,9 +44,11 @@ public partial class HrManagerContext : DbContext
 
     public virtual DbSet<SeniourAssign> SeniourAssigns { get; set; }
 
-//    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-//#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-//        => optionsBuilder.UseSqlServer("Server=(LocalDB)\\MSSQLLocalDB;Database=HrManager;Trusted_Connection=True;");
+    public virtual DbSet<Session> Sessions { get; set; }
+
+    //    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    //#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
+    //        => optionsBuilder.UseSqlServer("Server=(LocalDB)\\MSSQLLocalDB;Database=HrManager;Trusted_Connection=True;");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -182,6 +184,7 @@ public partial class HrManagerContext : DbContext
                 .IsUnicode(false)
                 .IsFixedLength()
                 .HasColumnName("gender");
+            entity.Property(e => e.IsActive).HasColumnName("isActive");
             entity.Property(e => e.LastName)
                 .HasMaxLength(25)
                 .HasColumnName("lastName");
@@ -238,6 +241,7 @@ public partial class HrManagerContext : DbContext
             entity.Property(e => e.HouseRent)
                 .HasColumnType("numeric(6, 0)")
                 .HasColumnName("houseRent");
+            entity.Property(e => e.IsActive).HasColumnName("isActive");
             entity.Property(e => e.Medical)
                 .HasColumnType("numeric(4, 0)")
                 .HasColumnName("medical");
@@ -305,9 +309,7 @@ public partial class HrManagerContext : DbContext
             entity.Property(e => e.IsAccepted).HasColumnName("isAccepted");
             entity.Property(e => e.IsApply).HasColumnName("isApply");
             entity.Property(e => e.LtId).HasColumnName("ltId");
-            entity.Property(e => e.Session)
-                .HasMaxLength(20)
-                .HasColumnName("session");
+            entity.Property(e => e.SId).HasColumnName("sId");
             entity.Property(e => e.ToDate)
                 .HasColumnType("date")
                 .HasColumnName("toDate");
@@ -323,6 +325,10 @@ public partial class HrManagerContext : DbContext
             entity.HasOne(d => d.Lt).WithMany(p => p.Leaves)
                 .HasForeignKey(d => d.LtId)
                 .HasConstraintName("FK_Leave_leaveType");
+
+            entity.HasOne(d => d.SIdNavigation).WithMany(p => p.Leaves)
+                .HasForeignKey(d => d.SId)
+                .HasConstraintName("FK_Leave_Session");
         });
 
         modelBuilder.Entity<LeaveType>(entity =>
@@ -332,7 +338,7 @@ public partial class HrManagerContext : DbContext
             entity.ToTable("leaveType");
 
             entity.Property(e => e.LtId).HasColumnName("ltId");
-            entity.Property(e => e.LeaveType1)
+            entity.Property(e => e.LeaveTypes)
                 .HasMaxLength(50)
                 .HasColumnName("leaveType");
         });
@@ -362,6 +368,18 @@ public partial class HrManagerContext : DbContext
             entity.HasOne(d => d.Emp).WithMany(p => p.SeniourAssigns)
                 .HasForeignKey(d => d.EmpId)
                 .HasConstraintName("FK_seniourAssign_Employee");
+        });
+
+        modelBuilder.Entity<Session>(entity =>
+        {
+            entity.HasKey(e => e.SId);
+
+            entity.ToTable("Session");
+
+            entity.Property(e => e.SId).HasColumnName("sId");
+            entity.Property(e => e.Sessions)
+                .HasMaxLength(30)
+                .HasColumnName("Session");
         });
 
         OnModelCreatingPartial(modelBuilder);

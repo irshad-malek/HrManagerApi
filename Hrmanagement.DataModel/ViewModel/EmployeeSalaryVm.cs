@@ -17,7 +17,7 @@ public partial class EmployeeSalaryVm
 
     public decimal? Taxes { get; set; }
 
+    public bool? IsActive { get; set; }
     public int EmpId { get; set; }
-
-    //public virtual EmployeeVm Emp { get; set; } = null!;
+    public string? firstName { get; set; }
 }

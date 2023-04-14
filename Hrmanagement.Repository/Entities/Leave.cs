@@ -13,8 +13,6 @@ public partial class Leave
 
     public DateTime? ToDate { get; set; }
 
-    public string? Session { get; set; }
-
     public decimal? Contact { get; set; }
 
     public string? Reason { get; set; }
@@ -27,9 +25,14 @@ public partial class Leave
 
     public bool? IsAccepted { get; set; }
 
+    public int? SId { get; set; }
+
     public virtual AprovedLeave? AIdNavigation { get; set; }
 
     public virtual Employee? Emp { get; set; }
 
     public virtual LeaveType? Lt { get; set; }
+
+    public virtual Session? SIdNavigation { get; set; }
+
 }
