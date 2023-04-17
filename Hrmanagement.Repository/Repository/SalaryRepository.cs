@@ -2,6 +2,8 @@
 using Hrmanagement.Repository.Data;
 using Hrmanagement.Repository.Entities;
 using Hrmanagement.Repository.Interface;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.VisualBasic;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,42 +22,54 @@ namespace Hrmanagement.Repository.Repository
             _context = context;
         }
 
-        public EmployeeSalary GetEmployeeSalary(int sId)
+        public async Task<List<EmployeeSalaryVm>> GetEmployeeSalary(int sId)
         {
-            return this._context.EmployeeSalaries.Find(sId);
+            
+           return await this._context.EmployeeSalaries.Where(x=>x.SId==sId).Select(x=>new EmployeeSalaryVm
+           {
+               BasicsSalary=x.BasicsSalary,
+               HouseRent=x.HouseRent,
+               GrossSalary=x.GrossSalary,
+               IsActive=x.IsActive,
+               taxAmount=x.taxAmount,
+               FirstName=x.Emp.FirstName
+           }).ToListAsync();
         }
 
-        public List<EmployeeSalaryVm> SalaryOfAllEmp()
+        public async Task<List<EmployeeSalaryVm>> SalaryOfAllEmp()
         {
-            return this._context.EmployeeSalaries.Select(x => new EmployeeSalaryVm { 
+            return await this._context.EmployeeSalaries.Select(x => new EmployeeSalaryVm { 
                 EmpId= x.EmpId,
-                firstName=x.Emp.FirstName,
+                FirstName=x.Emp.FirstName,
                 BasicsSalary =x.BasicsSalary,
-                Taxes=x.Taxes,
+                taxAmount = x.taxAmount,
                 GrossSalary=x.GrossSalary,
                 Medical=x.Medical,
                 HouseRent=x.HouseRent,
                 SId=x.SId,
                 IsActive=x.IsActive
-            }).Where(x=>x.IsActive==true).ToList();
+            }).Where(x=>x.IsActive==true).ToListAsync();
         }
 
-        public int save(EmployeeSalaryVm employeeSalaryVm)
+        public async Task<int> save(EmployeeSalaryVm employeeSalaryVm)
         {
             EmployeeSalary employeeSalary = new EmployeeSalary();
-            employeeSalary.BasicsSalary=employeeSalaryVm.BasicsSalary;
-            employeeSalary.GrossSalary=employeeSalaryVm.GrossSalary;
-            employeeSalary.Taxes=employeeSalaryVm.Taxes;
-            employeeSalary.Medical=employeeSalaryVm.Medical;
-            employeeSalary.HouseRent= employeeSalaryVm.HouseRent;
-            employeeSalary.EmpId= employeeSalaryVm.EmpId;
-            employeeSalary.IsActive=employeeSalaryVm.IsActive;
-            _context.Add(employeeSalary);
-            _context.SaveChanges();
-            return employeeSalary.SId;
+            if (employeeSalaryVm != null)
+            {
+                employeeSalary.BasicsSalary = employeeSalaryVm.BasicsSalary;
+                employeeSalary.GrossSalary = employeeSalaryVm.GrossSalary;
+                employeeSalary.taxAmount = employeeSalaryVm.taxAmount;
+                employeeSalary.Medical = employeeSalaryVm.Medical;
+                employeeSalary.HouseRent = employeeSalaryVm.HouseRent;
+                employeeSalary.EmpId = employeeSalaryVm.EmpId;
+                employeeSalary.IsActive = employeeSalaryVm.IsActive;
+                _context.EmployeeSalaries.Add(employeeSalary);
+                await _context.SaveChangesAsync();
+            }
+            return  employeeSalary.SId;
         }
 
-        public int updateSalary(EmployeeSalaryVm employeeSalaryVm, int sId)
+        public async Task<int> updateSalary(EmployeeSalaryVm employeeSalaryVm, int sId)
         {
             EmployeeSalary empSalary = new EmployeeSalary();
             if (sId > 0)
@@ -64,16 +78,16 @@ namespace Hrmanagement.Repository.Repository
                 empSalary = _context.EmployeeSalaries.FirstOrDefault(t => t.SId == sId);
                 empSalary.BasicsSalary = employeeSalaryVm.BasicsSalary;
                 empSalary.GrossSalary = employeeSalaryVm.GrossSalary;
-                empSalary.Taxes = employeeSalaryVm.Taxes;
+                empSalary.taxAmount = employeeSalaryVm.taxAmount;
                 empSalary.HouseRent = employeeSalaryVm.HouseRent;
                 empSalary.EmpId = employeeSalaryVm.EmpId;
-                empSalary.IsActive=true;
+                empSalary.IsActive=employeeSalaryVm.IsActive;
                 _context.EmployeeSalaries.Update(empSalary);
-                _context.SaveChanges();
+                await _context.SaveChangesAsync();
             }
             return empSalary.SId;
         }
-        public int DeleteEmpSalary(int sId)
+        public async Task<int> DeleteEmpSalary(int sId)
         {
             bool result = false;
             var emp = _context.EmployeeSalaries.Find(sId);
@@ -86,7 +100,7 @@ namespace Hrmanagement.Repository.Repository
                 employeeSalary.IsActive=false; 
                 employeeSalary.EmpId=emp.EmpId;
                 _context.EmployeeSalaries.Update(employeeSalary);
-                _context.SaveChanges();
+                await _context.SaveChangesAsync();
             }
             return employeeSalary.SId;
 

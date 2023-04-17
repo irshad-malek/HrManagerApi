@@ -1,8 +1,11 @@
 ﻿using Azure.Core;
+using Hrmanagement.Common;
 using Hrmanagement.Repository.Entities;
 using Hrmanagement.Repository.Interface;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.VisualBasic;
+using System.Xml;
 
 namespace HRmanagement.Controllers
 {
@@ -20,36 +23,109 @@ namespace HRmanagement.Controllers
         [HttpGet]
         [Route("salaryListOfEmp")]
 
-        public List<EmployeeSalaryVm> salaryListOfEmp()
+        public async Task<ActionResult<Common<List<EmployeeSalaryVm>>>> salaryListOfEmp()
         {
-            return this.salary.SalaryOfAllEmp();
+            try
+            {  
+                    return Ok(new Common<IEnumerable<EmployeeSalaryVm>>
+                    {
+                        Data = await this.salary.SalaryOfAllEmp(),
+                        Success = true,
+                        Message = "data display succcessfully",
+                    });     
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+            
+
+
+
         }
         [HttpPost]
         [Route("AddSalaryDetails")]
 
-        public int AddSalaryDetails(EmployeeSalaryVm employeeSalaryVm)
+        public async Task<ActionResult<Common<int>>> AddSalaryDetails(EmployeeSalaryVm employeeSalaryVm)
         {
-            return this.salary.save(employeeSalaryVm);
+            
+                
+                try
+                {
+                await salary.save(employeeSalaryVm);
+                return Ok(new Common<IEnumerable<EmployeeSalaryVm>>
+                    {
+                        Success = true,
+                        Message = "data saved succcessfully",
+                    });
+                }
+                catch (Exception e)
+                {
+                    throw new Exception(e.Message);
+                }     
         }
         [HttpGet]
         [Route("getEmpSalary/{sId}")]
-        public EmployeeSalary getEmpSalary(int sId)
+        public async Task<ActionResult<Common<EmployeeSalaryVm>>> getEmpSalary(int sId)
         {
-            return this.salary.GetEmployeeSalary(sId);
+            try
+            {
+                
+                return Ok(new Common<IEnumerable<EmployeeSalaryVm>>
+                {
+                    Data= await salary.GetEmployeeSalary(sId),
+                    Success = true,
+                    Message = "data display succcessfully",
+                });
+            }
+            catch (Exception e)
+            {
+
+                throw new Exception(e.Message);
+            }
+
+            //this.salary.GetEmployeeSalary(sId);
+
         }
         [HttpDelete]
         [Route("deleteEmpSalary/{sId}")]
 
-        public int DeleteEmpSalary(int sId)
+        public async Task<ActionResult<Common<int>>> DeleteEmpSalary(int sId)
         {
-            return this.salary.DeleteEmpSalary(sId);
+            try
+            {
+                await this.salary.DeleteEmpSalary(sId);
+                return Ok(new Common<IEnumerable<int>>
+                {
+                Success = true,
+                Message = "data delete succcessfully",
+                });
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+            //return this.salary.DeleteEmpSalary(sId);
         }
         [HttpPut]
         [Route("updateEmployeeSalary/{sId}")]
 
-        public int updateEmployeeSalary(EmployeeSalaryVm employeeSalaryVm, int sId)
+        public async Task<ActionResult<Common<int>>> updateEmployeeSalary(EmployeeSalaryVm employeeSalaryVm, int sId)
         {
-            return this.salary.updateSalary(employeeSalaryVm, sId);
+            try
+            {
+                await this.salary.updateSalary(employeeSalaryVm, sId);
+                return Ok(new Common<IEnumerable<int>>
+                {
+                    Success = true,
+                    Message = "data updated succcessfully",
+                });
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+            
         }
         
 

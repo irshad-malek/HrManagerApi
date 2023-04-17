@@ -9,15 +9,18 @@ namespace Hrmanagement.Repository.Interface
 {
     public interface ISalary
     {
-        int save(EmployeeSalaryVm employeeSalaryVm);
+        // int save(EmployeeSalaryVm employeeSalaryVm);
+        Task<int> save(EmployeeSalaryVm employeeSalaryVm);
+        Task<List<EmployeeSalaryVm>> SalaryOfAllEmp();
 
-        List<EmployeeSalaryVm> SalaryOfAllEmp();
+        //int updateSalary(EmployeeSalaryVm employeeSalaryVm,int sId);
+        Task<int> updateSalary(EmployeeSalaryVm employeeSalaryVm, int sId);
 
-        int updateSalary(EmployeeSalaryVm employeeSalaryVm,int sId);
+        //Task<EmployeeSalary> GetEmployeeSalary(int sId);
+        Task<List<EmployeeSalaryVm>> GetEmployeeSalary(int sId);
+        Task<int> DeleteEmpSalary(int sId);
 
-        EmployeeSalary GetEmployeeSalary(int sId);
-
-        public int DeleteEmpSalary(int sId);
+        //public int DeleteEmpSalary(int sId);
 
     }
 }
