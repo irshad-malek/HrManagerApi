@@ -66,12 +66,12 @@ namespace HRmanagement.Controllers
         }
         [HttpGet]
         [Route("getEmpSalary/{sId}")]
-        public async Task<ActionResult<Common<EmployeeSalaryVm>>> getEmpSalary(int sId)
+        public async Task<ActionResult<Common<EmployeeSalary>>> getEmpSalary(int sId)
         {
             try
             {
                 
-                return Ok(new Common<IEnumerable<EmployeeSalaryVm>>
+                return Ok(new Common<EmployeeSalary>
                 {
                     Data= await salary.GetEmployeeSalary(sId),
                     Success = true,

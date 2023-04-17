@@ -22,18 +22,10 @@ namespace Hrmanagement.Repository.Repository
             _context = context;
         }
 
-        public async Task<List<EmployeeSalaryVm>> GetEmployeeSalary(int sId)
+        public async Task<EmployeeSalary> GetEmployeeSalary(int sId)
         {
-            
-           return await this._context.EmployeeSalaries.Where(x=>x.SId==sId).Select(x=>new EmployeeSalaryVm
-           {
-               BasicsSalary=x.BasicsSalary,
-               HouseRent=x.HouseRent,
-               GrossSalary=x.GrossSalary,
-               IsActive=x.IsActive,
-               taxAmount=x.taxAmount,
-               FirstName=x.Emp.FirstName
-           }).ToListAsync();
+
+            return await this._context.EmployeeSalaries.FindAsync(sId);
         }
 
         public async Task<List<EmployeeSalaryVm>> SalaryOfAllEmp()
@@ -105,5 +97,7 @@ namespace Hrmanagement.Repository.Repository
             return employeeSalary.SId;
 
         }
+
+      
     }
 }

@@ -17,7 +17,7 @@ namespace Hrmanagement.Repository.Interface
         Task<int> updateSalary(EmployeeSalaryVm employeeSalaryVm, int sId);
 
         //Task<EmployeeSalary> GetEmployeeSalary(int sId);
-        Task<List<EmployeeSalaryVm>> GetEmployeeSalary(int sId);
+        Task<EmployeeSalary> GetEmployeeSalary(int sId);
         Task<int> DeleteEmpSalary(int sId);
 
         //public int DeleteEmpSalary(int sId);
