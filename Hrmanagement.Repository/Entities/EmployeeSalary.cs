@@ -15,9 +15,13 @@ public partial class EmployeeSalary
 
     public decimal? GrossSalary { get; set; }
 
-    public decimal? Taxes { get; set; }
+    public DateTime? FromDate { get; set; }
 
-    public int EmpId { get; set; }
+    public DateTime? ToDate { get; set; }
+
+    public decimal? TaxAmount { get; set; }
+
+    public int? EmpId { get; set; }
 
     public bool? IsActive { get; set; }
 

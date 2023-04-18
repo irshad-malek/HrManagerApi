@@ -1,6 +1,6 @@
-﻿using Hrmanagement.Repository.Data;
-using Hrmanagement.Repository.Entities;
+﻿using Hrmanagement.Repository.Entities;
 using Hrmanagement.Repository.Interface;
+using Hrmanagement.Repository.Data;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -30,10 +30,10 @@ namespace Hrmanagement.Repository.Repository
                 MobileNo = x.MobileNo,
                 EmailId=x.EmailId,
                 Address = x.Address,
-                deptName=x.Dept.DeptName,
-                desName=x.Desg.DesName,
-                employeeTypes=x.EmpType.EmployeeTypes
-
+                DepartmentName=x.Dept.DeptName,
+                DesignationName=x.Desg.DesName,
+                EmployeeTypes=x.EmpType.EmployeeTypes
+               
 
 
             }).ToList();

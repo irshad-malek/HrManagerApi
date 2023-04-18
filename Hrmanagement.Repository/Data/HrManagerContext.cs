@@ -16,10 +16,6 @@ public partial class HrManagerContext : DbContext
     {
     }
 
-    public virtual DbSet<AprovedLeave> AprovedLeaves { get; set; }
-
-    public virtual DbSet<Assignee> Assignees { get; set; }
-
     public virtual DbSet<Attendance> Attendances { get; set; }
 
     public virtual DbSet<Company> Companies { get; set; }
@@ -36,69 +32,20 @@ public partial class HrManagerContext : DbContext
 
     public virtual DbSet<EmployeeType> EmployeeTypes { get; set; }
 
-    public virtual DbSet<JuniourAssign> JuniourAssigns { get; set; }
-
     public virtual DbSet<Leave> Leaves { get; set; }
 
     public virtual DbSet<LeaveType> LeaveTypes { get; set; }
 
-    public virtual DbSet<SeniourAssign> SeniourAssigns { get; set; }
+    public virtual DbSet<Manager> Managers { get; set; }
 
     public virtual DbSet<Session> Sessions { get; set; }
 
-    //    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-    //#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-    //        => optionsBuilder.UseSqlServer("Server=(LocalDB)\\MSSQLLocalDB;Database=HrManager;Trusted_Connection=True;");
+//    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+//#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
+//        => optionsBuilder.UseSqlServer("Server=(LocalDB)\\MSSQLLocalDB;Database=HrManager;Trusted_Connection=True;");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<AprovedLeave>(entity =>
-        {
-            entity.HasKey(e => e.AId);
-
-            entity.ToTable("aprovedLeave");
-
-            entity.Property(e => e.AId).HasColumnName("aId");
-            entity.Property(e => e.EmpId).HasColumnName("empId");
-            entity.Property(e => e.IsApproved).HasColumnName("isApproved");
-
-            entity.HasOne(d => d.Emp).WithMany(p => p.AprovedLeaves)
-                .HasForeignKey(d => d.EmpId)
-                .HasConstraintName("FK_aprovedLeave_Employee");
-        });
-
-        modelBuilder.Entity<Assignee>(entity =>
-        {
-            entity.HasKey(e => e.AssId);
-
-            entity.ToTable("assignee");
-
-            entity.Property(e => e.AssId).HasColumnName("assId");
-            entity.Property(e => e.CreatedBy)
-                .HasMaxLength(50)
-                .HasColumnName("createdBy");
-            entity.Property(e => e.CreatedOn)
-                .HasColumnType("datetime")
-                .HasColumnName("createdOn");
-            entity.Property(e => e.IsActive).HasColumnName("isActive");
-            entity.Property(e => e.JId).HasColumnName("jId");
-            entity.Property(e => e.SId).HasColumnName("sId");
-            entity.Property(e => e.UpdatedBy)
-                .HasMaxLength(50)
-                .HasColumnName("updatedBy");
-            entity.Property(e => e.UpdatedOn)
-                .HasColumnType("datetime")
-                .HasColumnName("updatedOn");
-
-            entity.HasOne(d => d.JIdNavigation).WithMany(p => p.Assignees)
-                .HasForeignKey(d => d.JId)
-                .HasConstraintName("FK_assignee_juniourAssign");
-
-            entity.HasOne(d => d.SIdNavigation).WithMany(p => p.Assignees)
-                .HasForeignKey(d => d.SId)
-                .HasConstraintName("FK_assignee_seniourAssign");
-        });
-
         modelBuilder.Entity<Attendance>(entity =>
         {
             entity.ToTable("attendance");
@@ -161,9 +108,9 @@ public partial class HrManagerContext : DbContext
 
         modelBuilder.Entity<Employee>(entity =>
         {
-            entity.HasKey(e => e.EmpId);
+            entity.HasKey(e => e.EmpId).HasName("PK_Employee");
 
-            entity.ToTable("Employee");
+            entity.ToTable("employee");
 
             entity.Property(e => e.EmpId).HasColumnName("empId");
             entity.Property(e => e.Address)
@@ -188,6 +135,7 @@ public partial class HrManagerContext : DbContext
             entity.Property(e => e.LastName)
                 .HasMaxLength(25)
                 .HasColumnName("lastName");
+            entity.Property(e => e.MangerId).HasColumnName("mangerId");
             entity.Property(e => e.MobileNo)
                 .HasColumnType("numeric(12, 0)")
                 .HasColumnName("mobileNo");
@@ -211,11 +159,17 @@ public partial class HrManagerContext : DbContext
             entity.HasOne(d => d.EmployeeRole).WithMany(p => p.Employees)
                 .HasForeignKey(d => d.EmployeeRoleId)
                 .HasConstraintName("FK_Employee_EmployeeRole");
+
+            entity.HasOne(d => d.Manger).WithMany(p => p.Employees)
+                .HasForeignKey(d => d.MangerId)
+                .HasConstraintName("FK_Employee_manager");
         });
 
         modelBuilder.Entity<EmployeeRole>(entity =>
         {
-            entity.ToTable("EmployeeRole");
+            entity.HasKey(e => e.EmployeeRoleId).HasName("PK_EmployeeRole");
+
+            entity.ToTable("employeeRole");
 
             entity.Property(e => e.CreatedBy).HasMaxLength(50);
             entity.Property(e => e.EmployeeRoleName).HasMaxLength(30);
@@ -235,6 +189,9 @@ public partial class HrManagerContext : DbContext
                 .HasColumnType("numeric(10, 0)")
                 .HasColumnName("basicsSalary");
             entity.Property(e => e.EmpId).HasColumnName("empId");
+            entity.Property(e => e.FromDate)
+                .HasColumnType("date")
+                .HasColumnName("fromDate");
             entity.Property(e => e.GrossSalary)
                 .HasColumnType("numeric(12, 0)")
                 .HasColumnName("grossSalary");
@@ -245,9 +202,12 @@ public partial class HrManagerContext : DbContext
             entity.Property(e => e.Medical)
                 .HasColumnType("numeric(4, 0)")
                 .HasColumnName("medical");
-            entity.Property(e => e.Taxes)
+            entity.Property(e => e.TaxAmount)
                 .HasColumnType("numeric(5, 0)")
-                .HasColumnName("taxes");
+                .HasColumnName("taxAmount");
+            entity.Property(e => e.ToDate)
+                .HasColumnType("date")
+                .HasColumnName("toDate");
 
             entity.HasOne(d => d.Emp).WithMany(p => p.EmployeeSalaries)
                 .HasForeignKey(d => d.EmpId)
@@ -266,39 +226,13 @@ public partial class HrManagerContext : DbContext
                 .HasColumnName("employeeTypes");
         });
 
-        modelBuilder.Entity<JuniourAssign>(entity =>
-        {
-            entity.HasKey(e => e.JId);
-
-            entity.ToTable("juniourAssign");
-
-            entity.Property(e => e.JId).HasColumnName("jId");
-            entity.Property(e => e.CreatedBy)
-                .HasMaxLength(50)
-                .HasColumnName("createdBy");
-            entity.Property(e => e.CreatedOn)
-                .HasColumnType("datetime")
-                .HasColumnName("createdOn");
-            entity.Property(e => e.EmpId).HasColumnName("empId");
-            entity.Property(e => e.IsActive).HasColumnName("isActive");
-            entity.Property(e => e.UpdatedBy)
-                .HasMaxLength(50)
-                .HasColumnName("updatedBy");
-            entity.Property(e => e.UpdatedOn)
-                .HasColumnType("datetime")
-                .HasColumnName("updatedOn");
-
-            entity.HasOne(d => d.Emp).WithMany(p => p.JuniourAssigns)
-                .HasForeignKey(d => d.EmpId)
-                .HasConstraintName("FK_juniourAssign_Employee");
-        });
-
         modelBuilder.Entity<Leave>(entity =>
         {
-            entity.ToTable("Leave");
+            entity.HasKey(e => e.LeaveId).HasName("PK_Leave");
+
+            entity.ToTable("leave");
 
             entity.Property(e => e.LeaveId).HasColumnName("leaveId");
-            entity.Property(e => e.AId).HasColumnName("aId");
             entity.Property(e => e.Contact)
                 .HasColumnType("numeric(12, 0)")
                 .HasColumnName("contact");
@@ -308,23 +242,24 @@ public partial class HrManagerContext : DbContext
                 .HasColumnName("fromdate");
             entity.Property(e => e.IsAccepted).HasColumnName("isAccepted");
             entity.Property(e => e.IsApply).HasColumnName("isApply");
-            entity.Property(e => e.LtId).HasColumnName("ltId");
+            entity.Property(e => e.LeaveTypeId).HasColumnName("leaveTypeId");
+            entity.Property(e => e.ManagerId).HasColumnName("managerId");
             entity.Property(e => e.SId).HasColumnName("sId");
             entity.Property(e => e.ToDate)
                 .HasColumnType("date")
                 .HasColumnName("toDate");
 
-            entity.HasOne(d => d.AIdNavigation).WithMany(p => p.Leaves)
-                .HasForeignKey(d => d.AId)
-                .HasConstraintName("FK_Leave_aprovedLeave");
-
             entity.HasOne(d => d.Emp).WithMany(p => p.Leaves)
                 .HasForeignKey(d => d.EmpId)
                 .HasConstraintName("FK_Leave_Leave");
 
-            entity.HasOne(d => d.Lt).WithMany(p => p.Leaves)
-                .HasForeignKey(d => d.LtId)
-                .HasConstraintName("FK_Leave_leaveType");
+            entity.HasOne(d => d.LeaveType).WithMany(p => p.Leaves)
+                .HasForeignKey(d => d.LeaveTypeId)
+                .HasConstraintName("FK_Leave_leaveType1");
+
+            entity.HasOne(d => d.Manager).WithMany(p => p.Leaves)
+                .HasForeignKey(d => d.ManagerId)
+                .HasConstraintName("FK_Leave_manager");
 
             entity.HasOne(d => d.SIdNavigation).WithMany(p => p.Leaves)
                 .HasForeignKey(d => d.SId)
@@ -333,53 +268,61 @@ public partial class HrManagerContext : DbContext
 
         modelBuilder.Entity<LeaveType>(entity =>
         {
-            entity.HasKey(e => e.LtId);
-
             entity.ToTable("leaveType");
 
-            entity.Property(e => e.LtId).HasColumnName("ltId");
+            entity.Property(e => e.LeaveTypeId).HasColumnName("leaveTypeId");
             entity.Property(e => e.LeaveTypes)
                 .HasMaxLength(50)
-                .HasColumnName("leaveType");
+                .HasColumnName("leaveTypes");
         });
 
-        modelBuilder.Entity<SeniourAssign>(entity =>
+        modelBuilder.Entity<Manager>(entity =>
         {
-            entity.HasKey(e => e.SId);
+            entity.ToTable("manager");
 
-            entity.ToTable("seniourAssign");
-
-            entity.Property(e => e.SId).HasColumnName("sId");
-            entity.Property(e => e.CreatedBy)
+            entity.Property(e => e.ManagerId)
+                .ValueGeneratedNever()
+                .HasColumnName("managerId");
+            entity.Property(e => e.DeptId).HasColumnName("deptId");
+            entity.Property(e => e.EffectiveFromDate)
+                .HasColumnType("date")
+                .HasColumnName("effectiveFromDate");
+            entity.Property(e => e.EffectiveToDate)
+                .HasColumnType("date")
+                .HasColumnName("effectiveToDate");
+            entity.Property(e => e.Email)
                 .HasMaxLength(50)
-                .HasColumnName("createdBy");
-            entity.Property(e => e.CreatedOn)
-                .HasColumnType("datetime")
-                .HasColumnName("createdOn");
-            entity.Property(e => e.EmpId).HasColumnName("empId");
+                .HasColumnName("email");
+            entity.Property(e => e.EmployeeRoleId).HasColumnName("employeeRoleId");
+            entity.Property(e => e.FirstName)
+                .HasMaxLength(30)
+                .HasColumnName("firstName");
             entity.Property(e => e.IsActive).HasColumnName("isActive");
-            entity.Property(e => e.UpdateBy)
-                .HasMaxLength(50)
-                .HasColumnName("updateBy");
-            entity.Property(e => e.UpdatedOn)
-                .HasColumnType("datetime")
-                .HasColumnName("updatedOn");
+            entity.Property(e => e.LastName)
+                .HasMaxLength(30)
+                .HasColumnName("lastName");
+            entity.Property(e => e.MobileNo)
+                .HasMaxLength(10)
+                .IsFixedLength()
+                .HasColumnName("mobileNo");
 
-            entity.HasOne(d => d.Emp).WithMany(p => p.SeniourAssigns)
-                .HasForeignKey(d => d.EmpId)
-                .HasConstraintName("FK_seniourAssign_Employee");
+            entity.HasOne(d => d.Dept).WithMany(p => p.Managers)
+                .HasForeignKey(d => d.DeptId)
+                .HasConstraintName("FK_manager_department");
+
+            entity.HasOne(d => d.EmployeeRole).WithMany(p => p.Managers)
+                .HasForeignKey(d => d.EmployeeRoleId)
+                .HasConstraintName("FK_manager_EmployeeRole");
         });
 
         modelBuilder.Entity<Session>(entity =>
         {
-            entity.HasKey(e => e.SId);
+            entity.HasKey(e => e.SId).HasName("PK_Session");
 
-            entity.ToTable("Session");
+            entity.ToTable("session");
 
             entity.Property(e => e.SId).HasColumnName("sId");
-            entity.Property(e => e.Sessions)
-                .HasMaxLength(30)
-                .HasColumnName("Session");
+            entity.Property(e => e.Sessions).HasMaxLength(30);
         });
 
         OnModelCreatingPartial(modelBuilder);

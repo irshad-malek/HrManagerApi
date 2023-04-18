@@ -1,6 +1,6 @@
-using Hrmanagement.Repository.Data;
 using Hrmanagement.Repository.Interface;
 using Hrmanagement.Repository.Repository;
+using Hrmanagement.Repository.Data;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -17,6 +17,11 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<IEmployee,EmployeeRepository>();
 builder.Services.AddScoped<Idepartment,DepartmentRepository>();
+builder.Services.AddScoped<ILeaveApply,LeaveApplyRepository>();
+builder.Services.AddScoped<ISalary, SalaryRepository>();
+builder.Services.AddScoped<IEmployeeType, EmployeeTypeRepository>();
+builder.Services.AddScoped<IEmployeeRole, EmployeeRolesRepository>();
+builder.Services.AddScoped<IDesignation, DesignationRepository>();
 string connString = builder.Configuration.GetConnectionString("ConnectionString");
 builder.Services.AddDbContext<HrManagerContext>(options =>
 

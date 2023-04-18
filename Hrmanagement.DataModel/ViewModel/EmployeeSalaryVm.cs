@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 
 namespace Hrmanagement.Repository.Entities;
@@ -15,9 +16,15 @@ public partial class EmployeeSalaryVm
 
     public decimal? GrossSalary { get; set; }
 
-    public decimal? Taxes { get; set; }
+    public DateTime? FromDate { get; set; }
+
+    public DateTime? ToDate { get; set; }
+
+    public decimal? TaxAmount { get; set; }
+
+    public int? EmpId { get; set; }
 
     public bool? IsActive { get; set; }
-    public int EmpId { get; set; }
-    public string? firstName { get; set; }
+
+    public string? FirstName { get; set; }
 }

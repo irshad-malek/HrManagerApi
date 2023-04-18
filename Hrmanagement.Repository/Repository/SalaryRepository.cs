@@ -1,7 +1,7 @@
 ﻿using Azure.Core;
-using Hrmanagement.Repository.Data;
 using Hrmanagement.Repository.Entities;
 using Hrmanagement.Repository.Interface;
+using Hrmanagement.Repository.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualBasic;
 using System;
@@ -30,12 +30,12 @@ namespace Hrmanagement.Repository.Repository
 
         public async Task<List<EmployeeSalaryVm>> SalaryOfAllEmp()
         {
-            return await this._context.EmployeeSalaries.Select(x => new EmployeeSalaryVm { 
-                EmpId= x.EmpId,
-                FirstName=x.Emp.FirstName,
+            return await this._context.EmployeeSalaries.Select(x => new EmployeeSalaryVm {
+                EmpId = x.EmpId,
+                FirstName =x.Emp.FirstName,
                 BasicsSalary =x.BasicsSalary,
-                taxAmount = x.taxAmount,
-                GrossSalary=x.GrossSalary,
+                TaxAmount = x.TaxAmount,
+                GrossSalary =x.GrossSalary,
                 Medical=x.Medical,
                 HouseRent=x.HouseRent,
                 SId=x.SId,
@@ -50,7 +50,7 @@ namespace Hrmanagement.Repository.Repository
             {
                 employeeSalary.BasicsSalary = employeeSalaryVm.BasicsSalary;
                 employeeSalary.GrossSalary = employeeSalaryVm.GrossSalary;
-                employeeSalary.taxAmount = employeeSalaryVm.taxAmount;
+                employeeSalary.TaxAmount = employeeSalaryVm.TaxAmount;
                 employeeSalary.Medical = employeeSalaryVm.Medical;
                 employeeSalary.HouseRent = employeeSalaryVm.HouseRent;
                 employeeSalary.EmpId = employeeSalaryVm.EmpId;
@@ -70,7 +70,7 @@ namespace Hrmanagement.Repository.Repository
                 empSalary = _context.EmployeeSalaries.FirstOrDefault(t => t.SId == sId);
                 empSalary.BasicsSalary = employeeSalaryVm.BasicsSalary;
                 empSalary.GrossSalary = employeeSalaryVm.GrossSalary;
-                empSalary.taxAmount = employeeSalaryVm.taxAmount;
+                empSalary.TaxAmount = employeeSalaryVm.TaxAmount;
                 empSalary.HouseRent = employeeSalaryVm.HouseRent;
                 empSalary.EmpId = employeeSalaryVm.EmpId;
                 empSalary.IsActive=employeeSalaryVm.IsActive;

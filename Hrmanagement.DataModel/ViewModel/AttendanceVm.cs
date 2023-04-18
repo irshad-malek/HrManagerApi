@@ -15,5 +15,4 @@ public partial class AttendanceVm
 
     public int? EmpId { get; set; }
 
-    public virtual EmployeeVm? Emp { get; set; }
 }
