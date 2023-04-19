@@ -20,6 +20,8 @@ namespace Hrmanagement.Repository.Interface
         Task<EmployeeSalary> GetEmployeeSalary(int sId);
         Task<int> DeleteEmpSalary(int sId);
 
+        Task<bool> isEmployeeAvailable(int? EmpId);
+
         //public int DeleteEmpSalary(int sId);
 
     }

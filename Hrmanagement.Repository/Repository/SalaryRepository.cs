@@ -31,6 +31,7 @@ namespace Hrmanagement.Repository.Repository
         public async Task<List<EmployeeSalaryVm>> SalaryOfAllEmp()
         {
             return await this._context.EmployeeSalaries.Select(x => new EmployeeSalaryVm {
+                SId=x.SId,
                 EmpId = x.EmpId,
                 FirstName =x.Emp.FirstName,
                 BasicsSalary =x.BasicsSalary,
@@ -38,7 +39,6 @@ namespace Hrmanagement.Repository.Repository
                 GrossSalary =x.GrossSalary,
                 Medical=x.Medical,
                 HouseRent=x.HouseRent,
-                SId=x.SId,
                 IsActive=x.IsActive
             }).Where(x=>x.IsActive==true).ToListAsync();
         }
@@ -98,6 +98,11 @@ namespace Hrmanagement.Repository.Repository
 
         }
 
-      
+        public async Task<bool> isEmployeeAvailable(int? EmpId)
+        {
+            bool data = false;
+            data=await this._context.EmployeeSalaries.Where(x=>x.EmpId== EmpId).AnyAsync();
+            return data;
+        }
     }
 }

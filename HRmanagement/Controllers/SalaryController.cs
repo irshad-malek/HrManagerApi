@@ -47,17 +47,23 @@ namespace HRmanagement.Controllers
         [Route("AddSalaryDetails")]
 
         public async Task<ActionResult<Common<int>>> AddSalaryDetails(EmployeeSalaryVm employeeSalaryVm)
-        {
-            
-                
+        {     
                 try
                 {
-                await salary.save(employeeSalaryVm);
-                return Ok(new Common<IEnumerable<EmployeeSalaryVm>>
+                if(await this.salary.isEmployeeAvailable(employeeSalaryVm.EmpId))
+                {
+                    return BadRequest("employee is not available!");
+                }
+                else
+                {
+                    await salary.save(employeeSalaryVm);
+                    return Ok(new Common<IEnumerable<EmployeeSalaryVm>>
                     {
                         Success = true,
                         Message = "data saved succcessfully",
                     });
+                }
+                
                 }
                 catch (Exception e)
                 {
@@ -70,7 +76,6 @@ namespace HRmanagement.Controllers
         {
             try
             {
-                
                 return Ok(new Common<EmployeeSalary>
                 {
                     Data= await salary.GetEmployeeSalary(sId),
