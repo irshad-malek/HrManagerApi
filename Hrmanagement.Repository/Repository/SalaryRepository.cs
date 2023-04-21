@@ -31,7 +31,7 @@ namespace Hrmanagement.Repository.Repository
         public async Task<List<EmployeeSalaryVm>> SalaryOfAllEmp()
         {
             return await this._context.EmployeeSalaries.Select(x => new EmployeeSalaryVm {
-                SId=x.SId,
+                SalaryId=x.SalaryId,
                 EmpId = x.EmpId,
                 FirstName =x.Emp.FirstName,
                 BasicsSalary =x.BasicsSalary,
@@ -58,7 +58,7 @@ namespace Hrmanagement.Repository.Repository
                 _context.EmployeeSalaries.Add(employeeSalary);
                 await _context.SaveChangesAsync();
             }
-            return  employeeSalary.SId;
+            return  employeeSalary.SalaryId;
         }
 
         public async Task<int> updateSalary(EmployeeSalaryVm employeeSalaryVm, int sId)
@@ -67,7 +67,7 @@ namespace Hrmanagement.Repository.Repository
             if (sId > 0)
             {
 
-                empSalary = _context.EmployeeSalaries.FirstOrDefault(t => t.SId == sId);
+                empSalary = _context.EmployeeSalaries.FirstOrDefault(t => t.SalaryId == sId);
                 empSalary.BasicsSalary = employeeSalaryVm.BasicsSalary;
                 empSalary.GrossSalary = employeeSalaryVm.GrossSalary;
                 empSalary.TaxAmount = employeeSalaryVm.TaxAmount;
@@ -77,24 +77,24 @@ namespace Hrmanagement.Repository.Repository
                 _context.EmployeeSalaries.Update(empSalary);
                 await _context.SaveChangesAsync();
             }
-            return empSalary.SId;
+            return empSalary.SalaryId;
         }
-        public async Task<int> DeleteEmpSalary(int sId)
+        public async Task<int> DeleteEmpSalary(int SalaryId)
         {
             bool result = false;
-            var emp = _context.EmployeeSalaries.Find(sId);
+            var emp = _context.EmployeeSalaries.Find(SalaryId);
             EmployeeSalary employeeSalary = new EmployeeSalary();
 
             if (emp != null)
             {
 
-                employeeSalary = _context.EmployeeSalaries.FirstOrDefault(t => t.SId == sId);
+                employeeSalary = _context.EmployeeSalaries.FirstOrDefault(t => t.SalaryId == SalaryId);
                 employeeSalary.IsActive=false; 
                 employeeSalary.EmpId=emp.EmpId;
                 _context.EmployeeSalaries.Update(employeeSalary);
                 await _context.SaveChangesAsync();
             }
-            return employeeSalary.SId;
+            return employeeSalary.SalaryId;
 
         }
 
