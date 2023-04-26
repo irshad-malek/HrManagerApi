@@ -27,15 +27,13 @@ public partial class Employee
 
     public int? EmployeeRoleId { get; set; }
 
-    public int? CId { get; set; }
+    public int? CompanyId { get; set; }
 
     public bool? IsActive { get; set; }
 
-    public int? MangerId { get; set; }
-
     public virtual ICollection<Attendance> Attendances { get; } = new List<Attendance>();
 
-    public virtual Company? CIdNavigation { get; set; }
+    public virtual Company? Company { get; set; }
 
     public virtual Department? Dept { get; set; }
 
@@ -49,5 +47,9 @@ public partial class Employee
 
     public virtual ICollection<Leave> Leaves { get; } = new List<Leave>();
 
-    public virtual Manager? Manger { get; set; }
+    public virtual ICollection<Login> Logins { get; } = new List<Login>();
+
+    public virtual ICollection<Manager> ManagerEmpIdMgrNavigations { get; } = new List<Manager>();
+
+    public virtual ICollection<Manager> ManagerEmps { get; } = new List<Manager>();
 }

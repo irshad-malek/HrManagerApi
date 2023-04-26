@@ -5,7 +5,7 @@ namespace Hrmanagement.Repository.Entities;
 
 public partial class Session
 {
-    public int SId { get; set; }
+    public int SessionId { get; set; }
 
     public string? Sessions { get; set; }
 
