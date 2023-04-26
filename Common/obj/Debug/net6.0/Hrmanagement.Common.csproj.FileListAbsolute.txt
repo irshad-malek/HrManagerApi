@@ -10,3 +10,15 @@ E:\HrManagement\HRmanagement\Common\obj\Debug\net6.0\Hrmanagement.Common.dll
 E:\HrManagement\HRmanagement\Common\obj\Debug\net6.0\refint\Hrmanagement.Common.dll
 E:\HrManagement\HRmanagement\Common\obj\Debug\net6.0\Hrmanagement.Common.pdb
 E:\HrManagement\HRmanagement\Common\obj\Debug\net6.0\ref\Hrmanagement.Common.dll
+E:\HrManagement\HRmanagementApi\Common\bin\Debug\net6.0\Hrmanagement.Common.deps.json
+E:\HrManagement\HRmanagementApi\Common\bin\Debug\net6.0\Hrmanagement.Common.dll
+E:\HrManagement\HRmanagementApi\Common\bin\Debug\net6.0\Hrmanagement.Common.pdb
+E:\HrManagement\HRmanagementApi\Common\obj\Debug\net6.0\Hrmanagement.Common.csproj.AssemblyReference.cache
+E:\HrManagement\HRmanagementApi\Common\obj\Debug\net6.0\Hrmanagement.Common.GeneratedMSBuildEditorConfig.editorconfig
+E:\HrManagement\HRmanagementApi\Common\obj\Debug\net6.0\Hrmanagement.Common.AssemblyInfoInputs.cache
+E:\HrManagement\HRmanagementApi\Common\obj\Debug\net6.0\Hrmanagement.Common.AssemblyInfo.cs
+E:\HrManagement\HRmanagementApi\Common\obj\Debug\net6.0\Hrmanagement.Common.csproj.CoreCompileInputs.cache
+E:\HrManagement\HRmanagementApi\Common\obj\Debug\net6.0\Hrmanagement.Common.dll
+E:\HrManagement\HRmanagementApi\Common\obj\Debug\net6.0\refint\Hrmanagement.Common.dll
+E:\HrManagement\HRmanagementApi\Common\obj\Debug\net6.0\Hrmanagement.Common.pdb
+E:\HrManagement\HRmanagementApi\Common\obj\Debug\net6.0\ref\Hrmanagement.Common.dll
