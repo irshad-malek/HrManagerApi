@@ -105,7 +105,6 @@ E:\HrManagement\HRmanagementApi\HRmanagement\bin\Debug\net6.0\EntityFramework.dl
 E:\HrManagement\HRmanagementApi\HRmanagement\bin\Debug\net6.0\Humanizer.dll
 E:\HrManagement\HRmanagementApi\HRmanagement\bin\Debug\net6.0\Microsoft.AspNet.Identity.Core.dll
 E:\HrManagement\HRmanagementApi\HRmanagement\bin\Debug\net6.0\Microsoft.AspNet.Identity.EntityFramework.dll
-E:\HrManagement\HRmanagementApi\HRmanagement\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
 E:\HrManagement\HRmanagementApi\HRmanagement\bin\Debug\net6.0\Microsoft.Bcl.AsyncInterfaces.dll
 E:\HrManagement\HRmanagementApi\HRmanagement\bin\Debug\net6.0\Microsoft.Data.SqlClient.dll
 E:\HrManagement\HRmanagementApi\HRmanagement\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.dll
@@ -190,3 +189,4 @@ E:\HrManagement\HRmanagementApi\HRmanagement\obj\Debug\net6.0\refint\HRmanagemen
 E:\HrManagement\HRmanagementApi\HRmanagement\obj\Debug\net6.0\HRmanagement.pdb
 E:\HrManagement\HRmanagementApi\HRmanagement\obj\Debug\net6.0\HRmanagement.genruntimeconfig.cache
 E:\HrManagement\HRmanagementApi\HRmanagement\obj\Debug\net6.0\ref\HRmanagement.dll
+E:\HrManagement\HRmanagementApi\HRmanagement\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
