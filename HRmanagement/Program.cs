@@ -46,6 +46,7 @@ builder.Services.AddScoped<ISalary, SalaryRepository>();
 builder.Services.AddScoped<IEmployeeType, EmployeeTypeRepository>();
 builder.Services.AddScoped<IEmployeeRole, EmployeeRolesRepository>();
 builder.Services.AddScoped<IDesignation, DesignationRepository>();
+builder.Services.AddScoped<IAttendance, AttendanceRepository>();
 //builder.Services.AddScoped<IAccounts, AccountRepository>();
 builder.Services.AddScoped<IManager, ManagerRepository>();
 string connString = builder.Configuration.GetConnectionString("ConnectionString");
