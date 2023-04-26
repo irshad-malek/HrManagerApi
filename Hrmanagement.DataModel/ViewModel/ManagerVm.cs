@@ -8,6 +8,7 @@ namespace Hrmanagement.DataModel.ViewModel
 {
     public class ManagerVm
     {
+  
         public int ManagerId { get; set; }
 
         public int? EmployeeRoleId { get; set; }
