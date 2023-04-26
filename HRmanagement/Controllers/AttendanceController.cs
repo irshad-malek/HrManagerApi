@@ -2,10 +2,7 @@
 using Hrmanagement.DataModel.ViewModel;
 using Hrmanagement.Repository.Entities;
 using Hrmanagement.Repository.Interface;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.VisualBasic;
-using System.Security.Cryptography;
 
 namespace HRmanagement.Controllers
 {
