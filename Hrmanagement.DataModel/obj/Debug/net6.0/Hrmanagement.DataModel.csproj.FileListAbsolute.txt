@@ -10,15 +10,3 @@ E:\HrManagement\HRmanagement\Hrmanagement.DataModel\obj\Debug\net6.0\Hrmanagemen
 E:\HrManagement\HRmanagement\Hrmanagement.DataModel\obj\Debug\net6.0\refint\Hrmanagement.DataModel.dll
 E:\HrManagement\HRmanagement\Hrmanagement.DataModel\obj\Debug\net6.0\Hrmanagement.DataModel.pdb
 E:\HrManagement\HRmanagement\Hrmanagement.DataModel\obj\Debug\net6.0\ref\Hrmanagement.DataModel.dll
-E:\HrManagement\HRmanagementApi\Hrmanagement.DataModel\bin\Debug\net6.0\Hrmanagement.DataModel.deps.json
-E:\HrManagement\HRmanagementApi\Hrmanagement.DataModel\bin\Debug\net6.0\Hrmanagement.DataModel.dll
-E:\HrManagement\HRmanagementApi\Hrmanagement.DataModel\bin\Debug\net6.0\Hrmanagement.DataModel.pdb
-E:\HrManagement\HRmanagementApi\Hrmanagement.DataModel\obj\Debug\net6.0\Hrmanagement.DataModel.csproj.AssemblyReference.cache
-E:\HrManagement\HRmanagementApi\Hrmanagement.DataModel\obj\Debug\net6.0\Hrmanagement.DataModel.GeneratedMSBuildEditorConfig.editorconfig
-E:\HrManagement\HRmanagementApi\Hrmanagement.DataModel\obj\Debug\net6.0\Hrmanagement.DataModel.AssemblyInfoInputs.cache
-E:\HrManagement\HRmanagementApi\Hrmanagement.DataModel\obj\Debug\net6.0\Hrmanagement.DataModel.AssemblyInfo.cs
-E:\HrManagement\HRmanagementApi\Hrmanagement.DataModel\obj\Debug\net6.0\Hrmanagement.DataModel.csproj.CoreCompileInputs.cache
-E:\HrManagement\HRmanagementApi\Hrmanagement.DataModel\obj\Debug\net6.0\Hrmanagement.DataModel.dll
-E:\HrManagement\HRmanagementApi\Hrmanagement.DataModel\obj\Debug\net6.0\refint\Hrmanagement.DataModel.dll
-E:\HrManagement\HRmanagementApi\Hrmanagement.DataModel\obj\Debug\net6.0\Hrmanagement.DataModel.pdb
-E:\HrManagement\HRmanagementApi\Hrmanagement.DataModel\obj\Debug\net6.0\ref\Hrmanagement.DataModel.dll
