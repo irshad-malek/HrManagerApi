@@ -9,7 +9,6 @@ namespace Hrmanagement.DataModel.ViewModel
     public class SessionVm
     {
         public int SessionId { get; set; }
-
         public string? Sessions { get; set; }
     }
 }
