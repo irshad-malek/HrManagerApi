@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "j442Yd7zTqqMcdn22OZzIgklfArsgepAmDgLZFiiAliE6nCqMPLwPNufcEfADpiVTNJnCWfKRf8+tczmyoSSzQ==",
+  "dgSpecHash": "gDdSgA7XuLTEA30S/k8QmpXHc0egFvwlfpt1Ecq3VlFhr8mzbgAOfe9GP2sF4mdisqkwNWsr46WWQCXe9Lr4AA==",
   "success": true,
   "projectFilePath": "E:\\HrManagement\\HRmanagementApi\\HRmanagement\\HRmanagement.csproj",
   "expectedPackageFiles": [
@@ -10,6 +10,7 @@
     "C:\\Users\\irshad.malek\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\irshad.malek\\.nuget\\packages\\microsoft.aspnet.identity.core\\2.2.3\\microsoft.aspnet.identity.core.2.2.3.nupkg.sha512",
     "C:\\Users\\irshad.malek\\.nuget\\packages\\microsoft.aspnet.identity.entityframework\\2.2.3\\microsoft.aspnet.identity.entityframework.2.2.3.nupkg.sha512",
+    "C:\\Users\\irshad.malek\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\6.0.1\\microsoft.aspnetcore.authentication.jwtbearer.6.0.1.nupkg.sha512",
     "C:\\Users\\irshad.malek\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\1.1.1\\microsoft.bcl.asyncinterfaces.1.1.1.nupkg.sha512",
     "C:\\Users\\irshad.malek\\.nuget\\packages\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",
     "C:\\Users\\irshad.malek\\.nuget\\packages\\microsoft.data.sqlclient\\5.0.1\\microsoft.data.sqlclient.5.0.1.nupkg.sha512",
