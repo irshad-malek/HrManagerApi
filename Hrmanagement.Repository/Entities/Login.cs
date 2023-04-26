@@ -14,4 +14,5 @@ public partial class Login
     public virtual Employee? Emp { get; set; }
 
 
+
 }
