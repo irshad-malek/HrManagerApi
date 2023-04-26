@@ -16,6 +16,5 @@ namespace Hrmanagement.Repository.Interface
 
         Task<List<AttendanceVm>> getAllAtendance();
 
-
     }
 }

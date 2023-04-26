@@ -60,5 +60,6 @@ namespace Hrmanagement.Repository.Repository
                 OutTime = x.OutTime,
             }).ToList();
         }
+  
     }
 }
