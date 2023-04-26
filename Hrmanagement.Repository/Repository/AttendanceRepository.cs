@@ -28,6 +28,7 @@ namespace Hrmanagement.Repository.Repository
                 InTime = x.InTime,
                 OutTime = x.OutTime,
                 EmpId = x.EmpId,
+                Name=x.Emp.FirstName
             }).ToList();
         }
 
