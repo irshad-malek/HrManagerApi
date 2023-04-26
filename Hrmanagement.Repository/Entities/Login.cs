@@ -12,4 +12,6 @@ public partial class Login
     public string? Password { get; set; }
 
     public virtual Employee? Emp { get; set; }
+
+
 }
