@@ -5,9 +5,9 @@ namespace Hrmanagement.Repository.Entities;
 
 public partial class LeaveType
 {
-    public int LtId { get; set; }
+    public int LeaveTypeId { get; set; }
 
-    public string? LeaveType1 { get; set; }
+    public string? LeaveTypes { get; set; }
 
     public virtual ICollection<Leave> Leaves { get; } = new List<Leave>();
 }

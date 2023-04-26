@@ -47,6 +47,22 @@ namespace HRmanagement.Controllers
             return this.Iemployee.Update(employeeVm, EmpId);
         }
 
+        [HttpGet]
+        [Route("GetCompanyList")]
+
+        public List<CompanyVm> GetCompanyList()
+        {
+            return this.Iemployee.GetCompanyList();
+        }
+        [HttpGet]
+        [Route("getEmployeeById/{empId}")]
+
+        public Employee GetEmployeeById(int empId)
+        {
+            return this.Iemployee.GetEmployeeById(empId);
+        }
+
+        
 
     }
 }
