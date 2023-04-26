@@ -100,7 +100,12 @@ E:\HrManagement\HRmanagementApi\HRmanagement\bin\Debug\net6.0\HRmanagement.dll
 E:\HrManagement\HRmanagementApi\HRmanagement\bin\Debug\net6.0\HRmanagement.pdb
 E:\HrManagement\HRmanagementApi\HRmanagement\bin\Debug\net6.0\Azure.Core.dll
 E:\HrManagement\HRmanagementApi\HRmanagement\bin\Debug\net6.0\Azure.Identity.dll
+E:\HrManagement\HRmanagementApi\HRmanagement\bin\Debug\net6.0\EntityFramework.SqlServer.dll
+E:\HrManagement\HRmanagementApi\HRmanagement\bin\Debug\net6.0\EntityFramework.dll
 E:\HrManagement\HRmanagementApi\HRmanagement\bin\Debug\net6.0\Humanizer.dll
+E:\HrManagement\HRmanagementApi\HRmanagement\bin\Debug\net6.0\Microsoft.AspNet.Identity.Core.dll
+E:\HrManagement\HRmanagementApi\HRmanagement\bin\Debug\net6.0\Microsoft.AspNet.Identity.EntityFramework.dll
+E:\HrManagement\HRmanagementApi\HRmanagement\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
 E:\HrManagement\HRmanagementApi\HRmanagement\bin\Debug\net6.0\Microsoft.Bcl.AsyncInterfaces.dll
 E:\HrManagement\HRmanagementApi\HRmanagement\bin\Debug\net6.0\Microsoft.Data.SqlClient.dll
 E:\HrManagement\HRmanagementApi\HRmanagement\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.dll
@@ -130,6 +135,7 @@ E:\HrManagement\HRmanagementApi\HRmanagement\bin\Debug\net6.0\Microsoft.OpenApi.
 E:\HrManagement\HRmanagementApi\HRmanagement\bin\Debug\net6.0\Microsoft.SqlServer.Server.dll
 E:\HrManagement\HRmanagementApi\HRmanagement\bin\Debug\net6.0\Microsoft.Win32.SystemEvents.dll
 E:\HrManagement\HRmanagementApi\HRmanagement\bin\Debug\net6.0\Mono.TextTemplating.dll
+E:\HrManagement\HRmanagementApi\HRmanagement\bin\Debug\net6.0\Newtonsoft.Json.dll
 E:\HrManagement\HRmanagementApi\HRmanagement\bin\Debug\net6.0\Swashbuckle.AspNetCore.Swagger.dll
 E:\HrManagement\HRmanagementApi\HRmanagement\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerGen.dll
 E:\HrManagement\HRmanagementApi\HRmanagement\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerUI.dll

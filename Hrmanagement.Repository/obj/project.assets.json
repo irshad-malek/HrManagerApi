@@ -1112,9 +1112,6 @@
       "Hrmanagement.DataModel/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v6.0",
-        "dependencies": {
-          "Newtonsoft.Json": "13.0.3"
-        },
         "compile": {
           "bin/placeholder/Hrmanagement.DataModel.dll": {}
         },
