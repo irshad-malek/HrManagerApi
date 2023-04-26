@@ -10,23 +10,20 @@ namespace Hrmanagement.DataModel.ViewModel
     {
         public int ManagerId { get; set; }
 
-        public string? FirstName { get; set; }
-
-        public string? LastName { get; set; }
-
-        public string? Email { get; set; }
-
         public int? EmployeeRoleId { get; set; }
 
         public int? DeptId { get; set; }
-
-        public string? MobileNo { get; set; }
 
         public DateTime? EffectiveFromDate { get; set; }
 
         public DateTime? EffectiveToDate { get; set; }
 
         public bool? IsActive { get; set; }
+
+        public int? EmpId { get; set; }
+
+        public string? ManagerName { get; set; }
+        public int? EmpIdMgr { get; set; }
 
     }
 }

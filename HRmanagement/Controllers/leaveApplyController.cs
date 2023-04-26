@@ -1,4 +1,5 @@
-﻿using Hrmanagement.DataModel.ViewModel;
+﻿using Hrmanagement.Common;
+using Hrmanagement.DataModel.ViewModel;
 using Hrmanagement.Repository.Entities;
 using Hrmanagement.Repository.Interface;
 using Microsoft.AspNetCore.Http;
@@ -20,36 +21,118 @@ namespace HRmanagement.Controllers
 
         [HttpGet]
         [Route("getLeave")]
-        public List<LeaveVm> getLeave()
+        public async Task<ActionResult<Common<List<LeaveVm>>>> getLeave()
         {
-            return this.leaveApply.GetLeaves();
+            try
+            {
+                return Ok(new Common<IEnumerable<LeaveVm>>
+                {
+                    Data = await this.leaveApply.GetLeaves(),
+                    Success = true,
+                    Message = "data display succcessfully",
+                });
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+
+
         }
 
         [HttpPost]
-        [Route("leaveApplys")]
-        public int leaveApplys(LeaveVm leaveVm)
+        [Route("leaveApplys/{emailId}")]
+        public async Task<ActionResult<Common<int>>> leaveApplys(LeaveVm leaveVm,string emailId)
         {
-            return this.leaveApply.saveLeave(leaveVm);
+            try
+            {
+                await this.leaveApply.saveLeave(leaveVm, emailId);
+                return Ok(new Common<int>
+                {
+                    Success = true,
+                    Message = "data saved succcessfully"
+                });
+            }
+            catch (Exception e)
+            {
+
+                throw new Exception(e.Message);
+            }
+            
         }
         [HttpGet]
         [Route("getLeaveType")]
-        public List<leaveTypeVm> getLeaveType()
+        public async Task<ActionResult<Common<List<leaveTypeVm>>>> getLeaveType()
         {
-            return this.leaveApply.GetLeaveTypes();
+            try
+            {
+                return Ok(new Common<IEnumerable<leaveTypeVm>>
+                {
+                    Data = await this.leaveApply.GetLeaveTypes(),
+                    Success = true,
+                    Message = "data display succcessfully",
+                });
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
         }
         [HttpGet]
         [Route("getSession")]
-        public List<SessionVm> getSession()
+        public async Task<ActionResult<Common<List<SessionVm>>>> getSession()
         {
-            return this.leaveApply.GetSessions();
+            try
+            {
+                return Ok(new Common<IEnumerable<SessionVm>>
+                {
+                    Data = await this.leaveApply.GetSessions(),
+                    Success = true,
+                    Message = "data display succcessfully",
+                });
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
         }
         [HttpGet]
         [Route("getEmployee")]
-        public List<EmployeeVm> GetEmployee()
+        public async Task<ActionResult<List<EmployeeVm>>> GetEmployee()
         {
-            return this.leaveApply.GetEmployees();
+            try
+            {
+                return Ok(new Common<IEnumerable<EmployeeVm>>
+                {
+                    Data = await this.leaveApply.GetEmployees(),
+                    Success = true,
+                    Message = "data display succcessfully"
+                });
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
         }
 
+        [HttpGet]
+        [Route("getManager/{email}")]
+        public async Task<ActionResult<Common<List<ManagerVm>>>> getManager(string email)
+        {
+            try
+            {
+                return Ok(new Common<IEnumerable<ManagerVm>>
+                {
+                    Data = await this.leaveApply.getManager(email),
+                    Success = true,
+                    Message = "data display succcessfully"
+                });
+            }
+            catch (Exception e)
+            {
+               throw new Exception(e.Message);            
+            }
+        }
         
     }
 

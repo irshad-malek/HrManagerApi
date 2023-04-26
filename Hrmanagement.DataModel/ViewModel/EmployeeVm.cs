@@ -27,7 +27,7 @@ public partial class EmployeeVm
 
     public int? EmployeeRoleId { get; set; }
 
-    public int? CId { get; set; }
+    public int? CompanyId { get; set; }
 
     public bool? IsActive { get; set; }
 

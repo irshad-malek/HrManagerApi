@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Hrmanagement.DataModel.ViewModel;
 using Hrmanagement.Repository.Entities;
 using Microsoft.EntityFrameworkCore;
 
@@ -36,13 +37,15 @@ public partial class HrManagerContext : DbContext
 
     public virtual DbSet<LeaveType> LeaveTypes { get; set; }
 
+    public virtual DbSet<Login> Logins { get; set; }
+
     public virtual DbSet<Manager> Managers { get; set; }
 
     public virtual DbSet<Session> Sessions { get; set; }
 
-//    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-//#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-//        => optionsBuilder.UseSqlServer("Server=(LocalDB)\\MSSQLLocalDB;Database=HrManager;Trusted_Connection=True;");
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
+        => optionsBuilder.UseSqlServer("Data Source=10.100.172.11;Database=HrManager;User ID=hr;Password=psspl@123#;TrustServerCertificate=True");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -69,11 +72,9 @@ public partial class HrManagerContext : DbContext
 
         modelBuilder.Entity<Company>(entity =>
         {
-            entity.HasKey(e => e.CId);
-
             entity.ToTable("company");
 
-            entity.Property(e => e.CId).HasColumnName("cId");
+            entity.Property(e => e.CompanyId).HasColumnName("companyId");
             entity.Property(e => e.CLocation)
                 .HasMaxLength(30)
                 .HasColumnName("cLocation");
@@ -116,7 +117,7 @@ public partial class HrManagerContext : DbContext
             entity.Property(e => e.Address)
                 .HasMaxLength(50)
                 .HasColumnName("address");
-            entity.Property(e => e.CId).HasColumnName("cId");
+            entity.Property(e => e.CompanyId).HasColumnName("companyId");
             entity.Property(e => e.DeptId).HasColumnName("deptId");
             entity.Property(e => e.DesgId).HasColumnName("desgId");
             entity.Property(e => e.EmailId)
@@ -135,13 +136,12 @@ public partial class HrManagerContext : DbContext
             entity.Property(e => e.LastName)
                 .HasMaxLength(25)
                 .HasColumnName("lastName");
-            entity.Property(e => e.MangerId).HasColumnName("mangerId");
             entity.Property(e => e.MobileNo)
                 .HasColumnType("numeric(12, 0)")
                 .HasColumnName("mobileNo");
 
-            entity.HasOne(d => d.CIdNavigation).WithMany(p => p.Employees)
-                .HasForeignKey(d => d.CId)
+            entity.HasOne(d => d.Company).WithMany(p => p.Employees)
+                .HasForeignKey(d => d.CompanyId)
                 .HasConstraintName("FK_Employee_company");
 
             entity.HasOne(d => d.Dept).WithMany(p => p.Employees)
@@ -159,10 +159,6 @@ public partial class HrManagerContext : DbContext
             entity.HasOne(d => d.EmployeeRole).WithMany(p => p.Employees)
                 .HasForeignKey(d => d.EmployeeRoleId)
                 .HasConstraintName("FK_Employee_EmployeeRole");
-
-            entity.HasOne(d => d.Manger).WithMany(p => p.Employees)
-                .HasForeignKey(d => d.MangerId)
-                .HasConstraintName("FK_Employee_manager");
         });
 
         modelBuilder.Entity<EmployeeRole>(entity =>
@@ -180,11 +176,11 @@ public partial class HrManagerContext : DbContext
 
         modelBuilder.Entity<EmployeeSalary>(entity =>
         {
-            entity.HasKey(e => e.SId);
+            entity.HasKey(e => e.SalaryId);
 
             entity.ToTable("employeeSalary");
 
-            entity.Property(e => e.SId).HasColumnName("sId");
+            entity.Property(e => e.SalaryId).HasColumnName("salaryId");
             entity.Property(e => e.BasicsSalary)
                 .HasColumnType("numeric(10, 0)")
                 .HasColumnName("basicsSalary");
@@ -272,17 +268,30 @@ public partial class HrManagerContext : DbContext
 
             entity.Property(e => e.LeaveTypeId).HasColumnName("leaveTypeId");
             entity.Property(e => e.LeaveTypes)
-                .HasMaxLength(50)
+            .HasMaxLength(50)
                 .HasColumnName("leaveTypes");
+        });
+
+        modelBuilder.Entity<Login>(entity =>
+        {
+            entity.ToTable("login");
+
+            entity.Property(e => e.Id).HasColumnName("id");
+            entity.Property(e => e.EmpId).HasColumnName("empId");
+            entity.Property(e => e.Password)
+                .HasMaxLength(50)
+                .HasColumnName("password");
+
+            entity.HasOne(d => d.Emp).WithMany(p => p.Logins)
+                .HasForeignKey(d => d.EmpId)
+                .HasConstraintName("FK_login_employee");
         });
 
         modelBuilder.Entity<Manager>(entity =>
         {
             entity.ToTable("manager");
 
-            entity.Property(e => e.ManagerId)
-                .ValueGeneratedNever()
-                .HasColumnName("managerId");
+            entity.Property(e => e.ManagerId).HasColumnName("managerId");
             entity.Property(e => e.DeptId).HasColumnName("deptId");
             entity.Property(e => e.EffectiveFromDate)
                 .HasColumnType("date")
@@ -290,25 +299,22 @@ public partial class HrManagerContext : DbContext
             entity.Property(e => e.EffectiveToDate)
                 .HasColumnType("date")
                 .HasColumnName("effectiveToDate");
-            entity.Property(e => e.Email)
-                .HasMaxLength(50)
-                .HasColumnName("email");
+            entity.Property(e => e.EmpId).HasColumnName("empId");
+            entity.Property(e => e.EmpIdMgr).HasColumnName("empIdMgr");
             entity.Property(e => e.EmployeeRoleId).HasColumnName("employeeRoleId");
-            entity.Property(e => e.FirstName)
-                .HasMaxLength(30)
-                .HasColumnName("firstName");
             entity.Property(e => e.IsActive).HasColumnName("isActive");
-            entity.Property(e => e.LastName)
-                .HasMaxLength(30)
-                .HasColumnName("lastName");
-            entity.Property(e => e.MobileNo)
-                .HasMaxLength(10)
-                .IsFixedLength()
-                .HasColumnName("mobileNo");
 
             entity.HasOne(d => d.Dept).WithMany(p => p.Managers)
                 .HasForeignKey(d => d.DeptId)
                 .HasConstraintName("FK_manager_department");
+
+            entity.HasOne(d => d.Emp).WithMany(p => p.ManagerEmps)
+                .HasForeignKey(d => d.EmpId)
+                .HasConstraintName("FK_manager_employee");
+
+            entity.HasOne(d => d.EmpIdMgrNavigation).WithMany(p => p.ManagerEmpIdMgrNavigations)
+                .HasForeignKey(d => d.EmpIdMgr)
+                .HasConstraintName("FK_manager_employeeMgr");
 
             entity.HasOne(d => d.EmployeeRole).WithMany(p => p.Managers)
                 .HasForeignKey(d => d.EmployeeRoleId)
@@ -317,11 +323,11 @@ public partial class HrManagerContext : DbContext
 
         modelBuilder.Entity<Session>(entity =>
         {
-            entity.HasKey(e => e.SId).HasName("PK_Session");
+            entity.HasKey(e => e.SessionId).HasName("PK_Session");
 
             entity.ToTable("session");
 
-            entity.Property(e => e.SId).HasColumnName("sId");
+            entity.Property(e => e.SessionId).HasColumnName("sessionId");
             entity.Property(e => e.Sessions).HasMaxLength(30);
         });
 

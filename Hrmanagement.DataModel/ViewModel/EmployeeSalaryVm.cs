@@ -6,7 +6,7 @@ namespace Hrmanagement.Repository.Entities;
 
 public partial class EmployeeSalaryVm
 {
-    public int SId { get; set; }
+    public int SalaryId { get; set; }
 
     public decimal? BasicsSalary { get; set; }
 

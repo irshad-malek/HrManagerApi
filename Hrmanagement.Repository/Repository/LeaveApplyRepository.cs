@@ -2,6 +2,8 @@
 using Hrmanagement.Repository.Data;
 using Hrmanagement.Repository.Entities;
 using Hrmanagement.Repository.Interface;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.VisualBasic;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,7 +23,7 @@ namespace Hrmanagement.Repository.Repository
             _context = context;
         }
 
-        public List<EmployeeVm> GetEmployees()
+        public async Task<List<EmployeeVm>> GetEmployees()
         {
             //int id = 3007;
             //var leftFinal = from left in _context.Assignees
@@ -35,14 +37,14 @@ namespace Hrmanagement.Repository.Repository
            
 
 
-            return this._context.Employees.Select(x => new EmployeeVm
+            return await this._context.Employees.Select(x => new EmployeeVm
             {
                 EmpId = x.EmpId, 
                 FirstName = x.FirstName,
                 LastName = x.LastName
 
 
-            }).ToList();
+            }).ToListAsync();
         }
 
         //public List<LeaveApprovedVm> GetLeaveApproved()
@@ -68,9 +70,23 @@ namespace Hrmanagement.Repository.Repository
            
         //}
 
-        public List<LeaveVm> GetLeaves()
+        public async Task<List<ManagerVm>> getManager(string email)
         {
-            return this._context.Leaves.Select(x=>new LeaveVm { 
+           var employeeId= _context.Employees.Where(x=>x.EmailId==email).Select(x=>x.EmpId).First();
+           var match= this._context.Managers.Where(x=>x.EmpId== employeeId).First();
+           var data1= _context.Employees.Where(x => x.EmpId == match.EmpIdMgr).First();
+                return await this._context.Managers.Where(x => x.ManagerId == match.ManagerId).Select(m => new ManagerVm
+                {
+                    ManagerId = m.ManagerId,
+                    ManagerName=data1.FirstName
+                    //FirstName = m.FirstName
+                }).ToListAsync();
+            
+         
+        }
+        public async Task<List<LeaveVm>> GetLeaves()
+        {
+            return await this._context.Leaves.Select(x=>new LeaveVm { 
             LeaveId=x.LeaveId,
             LeaveTypeId =x.LeaveTypeId,
             Fromdate=x.Fromdate,
@@ -78,47 +94,50 @@ namespace Hrmanagement.Repository.Repository
             Contact=x.Contact,
             Reason=x.Reason,
             EmpId = x.EmpId,
+            ManagerId=x.ManagerId,
             //AId = x.AId,
             IsApply = x.IsApply,
             IsAccepted = x.IsAccepted
-            }).ToList();
+            }).ToListAsync();
         }
 
       
 
-        public List<leaveTypeVm> GetLeaveTypes()
+        public async Task<List<leaveTypeVm>> GetLeaveTypes()
         {
-            return this._context.LeaveTypes.Select(x => new leaveTypeVm
+            return await this._context.LeaveTypes.Select(x => new leaveTypeVm
             {
                 LeaveTypeId = x.LeaveTypeId,
                 LeaveTypes = x.LeaveTypes
-            }).ToList();
+            }).ToListAsync();
         }
 
-        public List<SessionVm> GetSessions()
+        public async Task<List<SessionVm>> GetSessions()
         {
-            return this._context.Sessions.Select(x => new SessionVm
+            return await this._context.Sessions.Select(x => new SessionVm
             {
-                SId = x.SId,
+                SessionId = x.SessionId,
                 Sessions = x.Sessions
-            }).ToList();
+            }).ToListAsync();
         }
 
-        public int saveLeave(LeaveVm leaveVm)
+        public async Task<int> saveLeave(LeaveVm leaveVm,string emailId)
         {
             Leave leave = new Leave();
+            Manager manager = new Manager();
             leave.LeaveTypeId = leaveVm.LeaveTypeId;
             leave.Fromdate = leaveVm.Fromdate;
             leave.ToDate = leaveVm.ToDate;
             leave.SId = leaveVm.SId;
             leave.Contact = leaveVm.Contact;
             leave.Reason = leaveVm.Reason;
-            leave.EmpId= leaveVm.EmpId;
-            //leave.AId = leaveVm.AId;
+            leave.EmpId= _context.Employees.Where(x=>x.EmailId==emailId).Select(x=>x.EmpId).First();
+            
+            leave.ManagerId = _context.Managers.Where(x => x.EmpId == leave.EmpId).Select(x => x.ManagerId).First();
             leave.IsApply = true;
             leave.IsAccepted = false;
-            _context.Add(leave);
-            _context.SaveChanges();
+            await _context.AddAsync(leave);
+            _context.SaveChangesAsync();
             return leave.LeaveId;
         }
     }
