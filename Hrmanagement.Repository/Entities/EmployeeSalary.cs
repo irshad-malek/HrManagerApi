@@ -5,7 +5,7 @@ namespace Hrmanagement.Repository.Entities;
 
 public partial class EmployeeSalary
 {
-    public int SId { get; set; }
+    public int SalaryId { get; set; }
 
     public decimal? BasicsSalary { get; set; }
 
@@ -15,9 +15,15 @@ public partial class EmployeeSalary
 
     public decimal? GrossSalary { get; set; }
 
-    public decimal? Taxes { get; set; }
+    public DateTime? FromDate { get; set; }
+
+    public DateTime? ToDate { get; set; }
+
+    public decimal? TaxAmount { get; set; }
 
     public int? EmpId { get; set; }
+
+    public bool? IsActive { get; set; }
 
     public virtual Employee? Emp { get; set; }
 }
