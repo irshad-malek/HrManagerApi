@@ -1,15 +1,12 @@
-﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
-using System;
+﻿using System;
 using System.Collections.Generic;
 
 namespace Hrmanagement.Repository.Entities;
 
 public partial class EmployeeSalary
 {
-    public int SId { get; set; }
+    public int SalaryId { get; set; }
 
-    [JsonProperty("Basics_Salary")]
     public decimal? BasicsSalary { get; set; }
 
     public decimal? HouseRent { get; set; }

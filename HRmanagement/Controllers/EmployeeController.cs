@@ -61,5 +61,8 @@ namespace HRmanagement.Controllers
         {
             return this.Iemployee.GetEmployeeById(empId);
         }
+
+        
+
     }
 }

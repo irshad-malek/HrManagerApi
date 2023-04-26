@@ -10,16 +10,17 @@ namespace Hrmanagement.Repository.Interface
 {
     public interface ILeaveApply
     {
-        List<LeaveVm>  GetLeaves();
+       Task<List<LeaveVm>>  GetLeaves();
 
-        int saveLeave(LeaveVm leaveVm);
+        Task<int> saveLeave(LeaveVm leaveVm,string emailId);
 
-        List<leaveTypeVm> GetLeaveTypes();
+        Task<List<leaveTypeVm>> GetLeaveTypes();
 
-        List<SessionVm> GetSessions();
-        List<EmployeeVm> GetEmployees();
+        Task<List<SessionVm>> GetSessions();
+        Task<List<EmployeeVm>> GetEmployees();
 
         //List<LeaveApprovedVm> GetLeaveApproved();
+        Task<List<ManagerVm>> getManager(string email);
 
 
     }
