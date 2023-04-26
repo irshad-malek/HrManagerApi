@@ -8,9 +8,13 @@ using System.Text;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Data.SqlClient;
 using System.Data.Entity;
+using HRmanagement.Controllers;
 
 var builder = WebApplication.CreateBuilder(args);
-
+builder.Services.AddMvc(options =>
+{
+    options.Filters.Add(typeof(ErrorController));
+});
 builder.Services.AddAuthentication(opt =>
 {
     opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
