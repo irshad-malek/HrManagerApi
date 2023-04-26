@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using Hrmanagement.DataModel.ViewModel;
 using Hrmanagement.Repository.Entities;
 using Microsoft.EntityFrameworkCore;
 
@@ -268,7 +267,7 @@ public partial class HrManagerContext : DbContext
 
             entity.Property(e => e.LeaveTypeId).HasColumnName("leaveTypeId");
             entity.Property(e => e.LeaveTypes)
-            .HasMaxLength(50)
+                .HasMaxLength(50)
                 .HasColumnName("leaveTypes");
         });
 
