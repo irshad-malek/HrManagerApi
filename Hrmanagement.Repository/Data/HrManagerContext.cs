@@ -333,5 +333,6 @@ public partial class HrManagerContext : DbContext
 
         OnModelCreatingPartial(modelBuilder);
     }
+ 
     partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
 }
