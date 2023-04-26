@@ -5,7 +5,7 @@ namespace Hrmanagement.Repository.Entities;
 
 public partial class CompanyVm
 {
-    public int CId { get; set; }
+    public int CompanyId { get; set; }
 
     public string? Name { get; set; }
 
