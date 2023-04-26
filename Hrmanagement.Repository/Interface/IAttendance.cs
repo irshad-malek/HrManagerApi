@@ -12,5 +12,9 @@ namespace Hrmanagement.Repository.Interface
     {
         Task<int> SaveUserAttendance(AttendanceVm attendanceVm);
 
+        Task<List<AttendanceVm>>  specificAttendance(string emailId);
+
+        Task<List<AttendanceVm>> getAllAtendance();
+
     }
 }

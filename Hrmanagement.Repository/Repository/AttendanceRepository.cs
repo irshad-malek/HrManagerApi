@@ -3,6 +3,7 @@ using Hrmanagement.Repository.Entities;
 using Hrmanagement.Repository.Interface;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,6 +17,18 @@ namespace Hrmanagement.Repository.Repository
         public AttendanceRepository(HrManagerContext context)
         {
             _context = context;
+        }
+
+        public async Task<List<AttendanceVm>> getAllAtendance()
+        {
+            return  this._context.Attendances.Select(x=>new AttendanceVm
+            {
+                AttendanceId=x.AttendanceId,
+                Status = x.Status,
+                InTime = x.InTime,
+                OutTime = x.OutTime,
+                EmpId = x.EmpId,
+            }).ToList();
         }
 
         public async Task<int> SaveUserAttendance(AttendanceVm attendanceVm)
@@ -35,5 +48,18 @@ namespace Hrmanagement.Repository.Repository
 
 
         }
+
+        public async Task<List<AttendanceVm>> specificAttendance(string emailId)
+        {
+            return  this._context.Attendances.Where(x => x.EmpId == _context.Employees.Where(x => x.EmailId == emailId).Select(x => x.EmpId).First()).Select(x => new AttendanceVm
+            {
+                AttendanceId = x.AttendanceId,
+                Status = x.Status,
+                EmpId = x.EmpId,
+                InTime = x.InTime,
+                OutTime = x.OutTime,
+            }).ToList();
+        }
+  
     }
 }
