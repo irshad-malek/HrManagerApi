@@ -4,6 +4,8 @@ using Hrmanagement.Repository.Entities;
 using Hrmanagement.Repository.Interface;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.VisualBasic;
+using System.Security.Cryptography;
 
 namespace HRmanagement.Controllers
 {
@@ -36,6 +38,48 @@ namespace HRmanagement.Controllers
             {
                 throw new Exception(e.Message);
             }
+        }
+        [HttpGet]
+        [Route("getAllAttendanceDetails")]
+        public async Task<ActionResult<Common<List<AttendanceVm>>>> getAllAttendanceDetails()
+        {
+            try
+            {
+               
+                return Ok(new Common<IEnumerable<AttendanceVm>>
+                {
+                    Data = await this.attendance.getAllAtendance(),
+                    Success = true,
+                    Message = "data display succcessfully",
+                });
+            }
+            catch (Exception e)
+            {
+
+                throw new Exception(e.Message);
+            }
+
+        }
+        [HttpGet]
+        [Route("getAllAttendanceSpecific/{emailId}")]
+        public async Task<ActionResult<Common<List<AttendanceVm>>>> getAllAttendanceSpecific(string emailId)
+        {
+            try
+            {
+
+                return Ok(new Common<IEnumerable<AttendanceVm>>
+                {
+                    Data = await this.attendance.specificAttendance(emailId),
+                    Success = true,
+                    Message = "data display succcessfully",
+                });
+            }
+            catch (Exception e)
+            {
+
+                throw new Exception(e.Message);
+            }
+
         }
     }
 }
