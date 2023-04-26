@@ -11,10 +11,12 @@ using System.Data.Entity;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddAuthentication(opt => {
+builder.Services.AddAuthentication(opt =>
+{
     opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
     opt.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-}).AddJwtBearer(options => {
+}).AddJwtBearer(options =>
+{
     options.TokenValidationParameters = new TokenValidationParameters
     {
         ValidateIssuer = true,
@@ -26,6 +28,7 @@ builder.Services.AddAuthentication(opt => {
         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration.GetSection("JWT:Secret").Value))
     };
 });
+
 // Add services to the container.
 builder.Services.AddCors(c =>
 {
