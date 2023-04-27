@@ -24,15 +24,33 @@ namespace HRmanagement.Controllers
         {
             try
             {
-               
-                    await manager.SaveManager(managerVm);
-                    return Ok(new Common<IEnumerable<ManagerVm>>
-                    {
-                        Success = true,
-                        Message = "data saved succcessfully",
-                    });
-                
 
+                await manager.SaveManager(managerVm);
+                return Ok(new Common<IEnumerable<ManagerVm>>
+                {
+                    Success = true,
+                    Message = "data saved succcessfully",
+                });
+
+
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
+        [HttpGet]
+        [Route("getAllManager")]
+
+        public async Task<ActionResult<Common<List<ManagerVm>>>> getAllManager(){
+            try
+            {
+                return Ok(new Common<IEnumerable<ManagerVm>>
+                {
+                    Data = await manager.GetAllManagerList(),
+                    Success = true,
+                    Message="data display successfully"
+                }) ;
             }
             catch (Exception e)
             {
