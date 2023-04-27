@@ -26,6 +26,7 @@ namespace Hrmanagement.Repository.Repository
         {
             return await this._context.Managers.Select(m => new ManagerVm
             {
+                ManagerId = m.ManagerId,
                 EmployeeRoleId = m.EmployeeRoleId,
                 EmployeeRoleName = m.EmployeeRole.EmployeeRoleName,
                 EmpIdMgr = m.EmpIdMgr,
