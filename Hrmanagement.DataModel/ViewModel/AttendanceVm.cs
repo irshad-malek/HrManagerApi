@@ -15,6 +15,8 @@ public partial class AttendanceVm
 
     public int? EmpId { get; set; }
 
-    public string? emailId { get; set; }    
+    public string? emailId { get; set; }  
+    
+    public string? Name { get; set; }
 
 }
