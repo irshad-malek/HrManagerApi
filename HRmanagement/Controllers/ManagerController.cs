@@ -39,5 +39,25 @@ namespace HRmanagement.Controllers
                 throw new Exception(e.Message);
             }
         }
+        [HttpGet]
+        [Route("getAllManager")]
+
+        public async Task<ActionResult<Common<List<ManagerVm>>>> getAllManager()
+        {
+            try
+            {
+
+                return Ok(new Common<IEnumerable<ManagerVm>>
+                {
+                    Data = await manager.GetAllManagerList(),
+                    Success = true,
+                    Message = "data display successfully"
+                });
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
     }
 }

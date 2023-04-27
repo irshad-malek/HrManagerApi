@@ -12,6 +12,7 @@ namespace Hrmanagement.DataModel.ViewModel
 
         public int? EmployeeRoleId { get; set; }
 
+        public string? EmployeeRoleName { get; set; }
         public int? DeptId { get; set; }
 
         public DateTime? EffectiveFromDate { get; set; }
@@ -22,8 +23,8 @@ namespace Hrmanagement.DataModel.ViewModel
 
         public int? EmpId { get; set; }
 
+        public string? EmployeeName { get; set; }
         public string? ManagerName { get; set; }
         public int? EmpIdMgr { get; set; }
-
     }
 }
