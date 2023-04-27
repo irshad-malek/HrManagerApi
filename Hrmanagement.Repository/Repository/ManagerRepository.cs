@@ -15,10 +15,12 @@ namespace Hrmanagement.Repository.Repository
     {
         private readonly HrManagerContext _context;
 
+
         public ManagerRepository(HrManagerContext context)
         {
             _context = context;
         }
+
 
         public async Task<List<ManagerVm>> GetAllManagerList()
         {

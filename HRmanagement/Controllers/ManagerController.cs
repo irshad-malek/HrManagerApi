@@ -24,20 +24,18 @@ namespace HRmanagement.Controllers
         {
             try
             {
-
                 await manager.SaveManager(managerVm);
                 return Ok(new Common<IEnumerable<ManagerVm>>
                 {
                     Success = true,
                     Message = "data saved succcessfully",
                 });
-
-
             }
             catch (Exception e)
             {
                 throw new Exception(e.Message);
             }
+
         }
         [HttpGet]
         [Route("getAllManager")]
@@ -45,6 +43,7 @@ namespace HRmanagement.Controllers
         public async Task<ActionResult<Common<List<ManagerVm>>>> getAllManager(){
             try
             {
+
                 return Ok(new Common<IEnumerable<ManagerVm>>
                 {
                     Data = await manager.GetAllManagerList(),

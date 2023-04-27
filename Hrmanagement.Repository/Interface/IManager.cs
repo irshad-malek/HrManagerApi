@@ -9,7 +9,7 @@ namespace Hrmanagement.Repository.Interface
 {
     public interface IManager
     {
-        Task<int> SaveManager(ManagerVm managerVm);
+        Task<int> SaveManager(ManagerVm managerVm);  
         Task<List<ManagerVm>> GetAllManagerList();
     }
 }
