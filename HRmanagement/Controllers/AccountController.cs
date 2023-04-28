@@ -1,5 +1,7 @@
-﻿using Hrmanagement.DataModel.ViewModel;
+﻿using Hrmanagement.Common;
+using Hrmanagement.DataModel.ViewModel;
 using Hrmanagement.Repository.Data;
+using Hrmanagement.Repository.Interface;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
@@ -16,11 +18,13 @@ namespace HRmanagement.Controllers
     {
         private readonly HrManagerContext _context;
         private readonly IConfiguration _configuration;
+        private readonly ILogin _login;
 
-        public AccountController(HrManagerContext context, IConfiguration configuration)
+        public AccountController(HrManagerContext context, IConfiguration configuration, ILogin login)
         {
             _context = context;
             _configuration = configuration;
+            _login= login;
         }
 
         [HttpPost]
@@ -44,7 +48,33 @@ namespace HRmanagement.Controllers
                     Token = tokenString
                 });
             }
-            return Unauthorized();
+            else
+            {
+                return Unauthorized();
+
+            }
         }
+        [HttpPost]
+        [Route("createPassword")]
+        public async Task<ActionResult<Common<int>>> createPassword(LoginVm loginVm)
+        {
+            try
+            {
+
+                await _login.createPassword(loginVm);
+                return Ok(new Common<IEnumerable<LoginVm>>
+                {
+                    Success = true,
+                    Message = "data saved succcessfully",
+                });
+
+
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
+    
     }
 }
