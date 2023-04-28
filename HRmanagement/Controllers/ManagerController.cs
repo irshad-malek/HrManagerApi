@@ -4,6 +4,8 @@ using Hrmanagement.Repository.Entities;
 using Hrmanagement.Repository.Interface;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Identity.Client;
+using Microsoft.VisualBasic;
 
 namespace HRmanagement.Controllers
 {
@@ -59,5 +61,34 @@ namespace HRmanagement.Controllers
                 throw new Exception(e.Message);
             }
         }
+        [HttpGet]
+        [Route("getManagerById/{id}")]
+        public Manager getManagerById(int id)
+        {
+            return manager.GetManagerById(id);
+        }
+        [HttpPut]
+        [Route("updateManagers/{id}")]
+
+        public async Task<ActionResult<Common<int>>> updateManagers(int id,ManagerVm managerVm)
+        {
+            try
+            {
+
+                await manager.updateMangers(id,managerVm);
+                return Ok(new Common<IEnumerable<ManagerVm>>
+                {
+                    Success = true,
+                    Message = "data update succcessfully",
+                });
+
+
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
+
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Hrmanagement.DataModel.ViewModel;
+using Hrmanagement.Repository.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +12,11 @@ namespace Hrmanagement.Repository.Interface
     {
         Task<int> SaveManager(ManagerVm managerVm);
         Task<List<ManagerVm>> GetAllManagerList();
+        //Task<List<ManagerVm>> getManagerById(int id);
+
+        Manager GetManagerById(int id);
+        Task<int> updateMangers(int id, ManagerVm managerVm);
+
 
     }
 }
