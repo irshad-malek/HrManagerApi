@@ -56,6 +56,33 @@ namespace Hrmanagement.Repository.Repository
             }
             return manager.ManagerId;
         }
+
+        public  Manager GetManagerById(int id)
+        {
+            return  this._context.Managers.Find(id);
+        }
+
+        public async Task<int> updateMangers(int id,ManagerVm managerVm)
+        {
+            Manager manager = new ();
+            if (id > 0)
+            {
+
+                manager = _context.Managers.FirstOrDefault(t => t.ManagerId == id);
+                manager.EmpIdMgr= managerVm.EmpIdMgr;
+                manager.DeptId= managerVm.DeptId;
+                manager.EffectiveFromDate = managerVm.EffectiveFromDate;
+                manager.EffectiveToDate = managerVm.EffectiveToDate;
+                manager.EmpId = managerVm.EmpId;
+                manager.IsActive = managerVm.IsActive;
+                
+                _context.Managers.Update(manager);
+                 await _context.SaveChangesAsync();
+                //hrManagerContext.Employees.Update(emp);
+                //hrManagerContext.SaveChanges();
+            }
+            return manager.ManagerId;
+        }
     }
 
 
