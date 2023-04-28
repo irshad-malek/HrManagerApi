@@ -37,17 +37,26 @@ namespace Hrmanagement.Repository.Repository
            Attendance attendance = new Attendance();
             if(attendanceVm != null)
             {
-                attendance.InTime = attendanceVm.InTime;
-                attendance.OutTime = attendanceVm.OutTime;
-                attendance.Status = attendanceVm.Status;
-                attendance.EmpId = _context.Employees.Where(x=>x.EmailId==attendanceVm.emailId).Select(x=>x.EmpId).First();
-                await _context.AddAsync(attendance);
-                _context.SaveChangesAsync();               
+               var result = _context.Attendances.Where(y => y.EmpId == _context.Employees.Where(x => x.EmailId == attendanceVm.emailId).Select(x => x.EmpId).First() && y.InTime!=null).FirstOrDefault();
+                if (result!=null)
+                {
+                    attendance = _context.Attendances.FirstOrDefault(t => t.AttendanceId==result.AttendanceId);
+                    attendance.InTime = attendanceVm.InTime;
+                    attendance.Status = attendanceVm.Status;
+                    attendance.OutTime = attendanceVm.OutTime;
+                     _context.Update(attendance);
+                   await _context.SaveChangesAsync();
+                }else
+                {
+                    attendance.InTime = attendanceVm.InTime;
+                    attendance.OutTime = attendanceVm.OutTime;
+                    attendance.Status = attendanceVm.Status;
+                    attendance.EmpId = _context.Employees.Where(x => x.EmailId == attendanceVm.emailId).Select(x => x.EmpId).First();
+                    await _context.AddAsync(attendance);
+                    _context.SaveChangesAsync();
+                }                        
             }
-
             return attendance.AttendanceId;
-
-
         }
 
         public async Task<List<AttendanceVm>> specificAttendance(string emailId)
