@@ -114,5 +114,14 @@ namespace Hrmanagement.Repository.Repository
                 
             }).ToList();
         }
+
+        public bool employeeEmailExist(string emailId)
+        {
+            bool result=false;
+
+            result=this.hrManagerContext.Employees.Where(x=>x.EmailId==emailId).Any();  
+
+            return result;
+        }
     }
 }
