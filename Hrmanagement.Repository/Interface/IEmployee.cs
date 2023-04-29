@@ -20,5 +20,7 @@ namespace Hrmanagement.Repository.Interface
 
         List<CompanyVm> GetCompanyList();
 
+        bool employeeEmailExist(string emailId);
+
     }
 }

@@ -61,8 +61,12 @@ namespace HRmanagement.Controllers
         {
             return this.Iemployee.GetEmployeeById(empId);
         }
-
-        
+        [HttpGet]
+        [Route("EmployeeemailExist/{emailId}")]
+        public bool EmployeeemailExist(string emailId)
+        {
+            return this.Iemployee.employeeEmailExist(emailId);
+        }
 
     }
 }
