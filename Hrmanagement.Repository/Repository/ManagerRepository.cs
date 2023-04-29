@@ -83,6 +83,49 @@ namespace Hrmanagement.Repository.Repository
             }
             return manager.ManagerId;
         }
+
+        public List<LeaveVm> LeaveApproved(string emailId)
+        {
+            return this._context.Leaves.Where(x=>x.Emp.EmailId==emailId).Select(x => new LeaveVm
+            {
+                LeaveId = x.LeaveId,
+                LeaveTypeId = x.LeaveTypeId,
+                Fromdate = x.Fromdate,
+                ToDate = x.ToDate,
+                Reason = x.Reason,
+                SeniorEmpName=x.Manager.EmpIdMgrNavigation.FirstName,
+                Contact=x.Contact,
+                FirstName=x.Emp.FirstName,
+                SId=x.SId,
+                LeaveType=x.LeaveType.LeaveTypes,
+                IsAccepted=x.IsAccepted,
+                EmpId=x.EmpId,
+
+            }).Where(x=>x.IsAccepted==false).ToList();
+        }
+
+        public List<LeaveVm> LeaveApprovedByManager()
+        {
+            var dataobject = (from ME in _context.Leaves
+                              join RT in _context.Managers on ME.ManagerId equals RT.ManagerId
+                             
+
+                              select new LeaveVm
+                              {
+                                 LeaveType=ME.LeaveType.LeaveTypes,
+                                 Fromdate=ME.Fromdate,
+                                 ToDate=ME.ToDate,
+                                 Contact=ME.Contact,
+                                 Reason=ME.Reason,
+                                 IsApply=ME.IsApply,
+                                 FirstName=ME.Emp.FirstName,
+                                 IsAccepted=ME.IsAccepted,
+
+
+                              }).ToList();
+
+            return dataobject;
+        }
     }
 
 

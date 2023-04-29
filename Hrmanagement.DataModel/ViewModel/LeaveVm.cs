@@ -12,6 +12,7 @@ namespace Hrmanagement.DataModel.ViewModel
 
         public int? LeaveTypeId { get; set; }
 
+        public string? LeaveType { get; set; }
         public DateTime? Fromdate { get; set; }
 
         public DateTime? ToDate { get; set; }
@@ -28,6 +29,9 @@ namespace Hrmanagement.DataModel.ViewModel
 
         public bool? IsAccepted { get; set; }
 
+        public string?  FirstName { get; set; }
+
+        public string? SeniorEmpName { get;set; }
         public int? SId { get; set; }
     }
 }
