@@ -17,6 +17,8 @@ namespace Hrmanagement.Repository.Interface
         Manager GetManagerById(int id);
         Task<int> updateMangers(int id, ManagerVm managerVm);
 
+        List<LeaveVm> LeaveApproved(string emailId);
 
+        List<LeaveVm> LeaveApprovedByManager();
     }
 }

@@ -89,6 +89,19 @@ namespace HRmanagement.Controllers
                 throw new Exception(e.Message);
             }
         }
+        [HttpGet]
+        [Route("LeaveApproved/{emailId}")]
 
+        public List<LeaveVm> LeaveApproved(string emailId)
+        {
+            return this.manager.LeaveApproved(emailId);    
+        }
+        [HttpGet]
+        [Route("LeaveApprovedByManager")]
+
+        public List<LeaveVm> LeaveApprovedByManager()
+        {
+            return this.manager.LeaveApprovedByManager();
+        }
     }
 }
