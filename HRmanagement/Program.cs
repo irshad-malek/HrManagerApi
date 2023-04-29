@@ -5,9 +5,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Data.SqlClient;
-using System.Data.Entity;
 using HRmanagement.Controllers;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -53,6 +50,7 @@ builder.Services.AddScoped<IDesignation, DesignationRepository>();
 builder.Services.AddScoped<IAttendance, AttendanceRepository>();
 //builder.Services.AddScoped<IAccounts, AccountRepository>();
 builder.Services.AddScoped<IManager, ManagerRepository>();
+builder.Services.AddScoped<ILogin, LoginRepository>();
 string connString = builder.Configuration.GetConnectionString("ConnectionString");
 builder.Services.AddDbContext<HrManagerContext>(options =>
 
