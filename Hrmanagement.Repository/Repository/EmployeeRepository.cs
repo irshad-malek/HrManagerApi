@@ -123,5 +123,17 @@ namespace Hrmanagement.Repository.Repository
 
             return result;
         }
+
+        public bool getTypeEmployees(string emailId)
+        {
+            bool result=false;
+            if(emailId!="null")
+            {
+                result = this.hrManagerContext.Employees.Where(x => x.EmailId == emailId && x.EmpTypeId == 2).Any();
+
+            }
+            
+            return result;
+        }
     }
 }
