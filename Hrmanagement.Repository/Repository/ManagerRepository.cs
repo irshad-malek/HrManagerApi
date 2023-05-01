@@ -86,7 +86,7 @@ namespace Hrmanagement.Repository.Repository
 
         public List<LeaveVm> LeaveApproved(string emailId)
         {
-            return this._context.Leaves.Where(x=>x.Emp.EmailId==emailId).Select(x => new LeaveVm
+            return this._context.Leaves.Where(x=>x.Emp.EmailId==emailId && x.IsApply==true).Select(x => new LeaveVm
             {
                 LeaveId = x.LeaveId,
                 LeaveTypeId = x.LeaveTypeId,
@@ -100,18 +100,20 @@ namespace Hrmanagement.Repository.Repository
                 LeaveType=x.LeaveType.LeaveTypes,
                 IsAccepted=x.IsAccepted,
                 EmpId=x.EmpId,
+                IsApply=x.IsApply,
 
             }).Where(x=>x.IsAccepted==false).ToList();
         }
 
-        public List<LeaveVm> LeaveApprovedByManager()
+        public List<LeaveVm> LeaveApprovedByManager(string emailId)
         {
             var dataobject = (from ME in _context.Leaves
                               join RT in _context.Managers on ME.ManagerId equals RT.ManagerId
-                             
+                              where RT.EmpIdMgrNavigation.EmailId==emailId
 
                               select new LeaveVm
                               {
+                                  LeaveId=ME.LeaveId,
                                  LeaveType=ME.LeaveType.LeaveTypes,
                                  Fromdate=ME.Fromdate,
                                  ToDate=ME.ToDate,
@@ -122,9 +124,23 @@ namespace Hrmanagement.Repository.Repository
                                  IsAccepted=ME.IsAccepted,
 
 
-                              }).ToList();
+                              }).Where(x=>x.IsAccepted==false).ToList();
 
             return dataobject;
+        }
+
+        public int LeaveApprovedSave(int leaveId,LeaveVm leaveVm)
+        {
+            Leave leave = new();
+            if(leaveId>0)
+            {
+                leave = _context.Leaves.FirstOrDefault(x => x.LeaveId == leaveId);
+                leave.IsAccepted = leaveVm.IsAccepted;
+
+                _context.Leaves.Update(leave);
+                _context.SaveChanges();
+            }
+            return leave.LeaveId;
         }
     }
 

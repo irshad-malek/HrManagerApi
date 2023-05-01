@@ -30,7 +30,7 @@ namespace HRmanagement.Controllers
         [HttpPost]
         [Route("login")]
         public IActionResult Login([FromBody] LoginVm loginVm)
-        {
+            {
             if (loginVm is null)
             {
                 return BadRequest("Invalid user request!!!");

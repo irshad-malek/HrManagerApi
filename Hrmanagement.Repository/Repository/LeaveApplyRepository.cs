@@ -140,5 +140,18 @@ namespace Hrmanagement.Repository.Repository
             _context.SaveChangesAsync();
             return leave.LeaveId;
         }
+
+        public int LeaveWithdraw(int leaveId, LeaveVm leaveVm)
+        {
+            Leave leave = new();
+            if(leaveId > 0)
+            {
+                leave=_context.Leaves.FirstOrDefault(x=>x.LeaveId==leaveId);
+                leave.IsApply=leaveVm.IsApply;
+                _context.Leaves.Update(leave);
+                _context.SaveChanges();
+            }
+            return leave.LeaveId;
+        }
     }
 }

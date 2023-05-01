@@ -133,7 +133,16 @@ namespace HRmanagement.Controllers
                throw new Exception(e.Message);            
             }
         }
-        
+        [HttpPut]
+        [Route("leaveWithdraw/{leaveId}")]
+
+        public int leaveWithdraw(int leaveId,LeaveVm leaveVm)
+        {
+            return this.leaveApply.LeaveWithdraw(leaveId, leaveVm);
+        }
+
+
+
     }
 
 }

@@ -97,11 +97,18 @@ namespace HRmanagement.Controllers
             return this.manager.LeaveApproved(emailId);    
         }
         [HttpGet]
-        [Route("LeaveApprovedByManager")]
+        [Route("LeaveApprovedByManager/{emailId}")]
 
-        public List<LeaveVm> LeaveApprovedByManager()
+        public List<LeaveVm> LeaveApprovedByManager(string emailId)
         {
-            return this.manager.LeaveApprovedByManager();
+            return this.manager.LeaveApprovedByManager(emailId);
+        }
+        [HttpPut]
+        [Route("LeaveApprovedSave/{leaveId}")]
+
+        public int LeaveApprovedSave(int leaveId,LeaveVm leaveVm)
+        {
+            return  this.manager.LeaveApprovedSave(leaveId, leaveVm);
         }
     }
 }

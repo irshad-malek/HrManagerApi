@@ -41,7 +41,7 @@ namespace Hrmanagement.Repository.Repository
                 if (result!=null)
                 {
                     attendance = _context.Attendances.FirstOrDefault(t => t.AttendanceId==result.AttendanceId);
-                    attendance.InTime = attendanceVm.InTime;
+                    //attendance.InTime = attendanceVm.InTime;
                     attendance.Status = attendanceVm.Status;
                     attendance.OutTime = attendanceVm.OutTime;
                      _context.Update(attendance);
