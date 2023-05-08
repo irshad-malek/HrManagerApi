@@ -2,6 +2,7 @@
 using Hrmanagement.Repository.Interface;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel;
 
 namespace HRmanagement.Controllers
 {
@@ -72,6 +73,13 @@ namespace HRmanagement.Controllers
         public bool getEmployeeType(string emailId)
         {
             return this.Iemployee.getTypeEmployees(emailId);
+        }
+
+        [HttpGet]
+        [Route("getSpecificEmployee/{emailId}")]
+        public List<EmployeeVm> getSpecificEmployee(string emailId)
+        {
+            return this.Iemployee.getSpecificEmployee(emailId);
         }
     }
 }

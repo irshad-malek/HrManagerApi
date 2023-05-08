@@ -33,5 +33,7 @@ namespace Hrmanagement.DataModel.ViewModel
 
         public string? SeniorEmpName { get;set; }
         public int? SId { get; set; }
+        public bool? IsRejected { get; set; }
+
     }
 }

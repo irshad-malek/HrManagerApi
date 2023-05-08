@@ -39,6 +39,8 @@ public partial class EmployeeVm
 
     public string? DepartmentName { get; set; }
 
+    public string? ManagerName { get; set; }
+
     //public virtual ICollection<AttendanceVm> Attendances { get; } = new List<AttendanceVm>();
 
     //public virtual DepartmentVm? Dept { get; set; }

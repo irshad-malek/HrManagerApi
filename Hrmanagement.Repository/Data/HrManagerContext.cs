@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using Hrmanagement.DataModel.ViewModel;
 using Hrmanagement.Repository.Entities;
 using Microsoft.EntityFrameworkCore;
 
@@ -45,7 +43,7 @@ public partial class HrManagerContext : DbContext
 
 //    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 //#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-//        => optionsBuilder.UseSqlServer("Data Source=10.100.172.11;Database=HrManager;User ID=hr;Password=psspl@123#;TrustServerCertificate=True");
+//        => optionsBuilder.UseSqlServer("Data Source=10.100.172.11;Database=Hrmanager;TrustServerCertificate=True;User ID=hr;Password=psspl@123#");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -238,6 +236,7 @@ public partial class HrManagerContext : DbContext
                 .HasColumnName("fromdate");
             entity.Property(e => e.IsAccepted).HasColumnName("isAccepted");
             entity.Property(e => e.IsApply).HasColumnName("isApply");
+            entity.Property(e => e.IsRejected).HasColumnName("isRejected");
             entity.Property(e => e.LeaveTypeId).HasColumnName("leaveTypeId");
             entity.Property(e => e.ManagerId).HasColumnName("managerId");
             entity.Property(e => e.SId).HasColumnName("sId");
@@ -268,7 +267,7 @@ public partial class HrManagerContext : DbContext
 
             entity.Property(e => e.LeaveTypeId).HasColumnName("leaveTypeId");
             entity.Property(e => e.LeaveTypes)
-            .HasMaxLength(50)
+                .HasMaxLength(50)
                 .HasColumnName("leaveTypes");
         });
 

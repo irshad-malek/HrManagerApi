@@ -21,6 +21,7 @@ namespace Hrmanagement.Repository.Interface
 
         List<LeaveVm> LeaveApprovedByManager(string emailId);
         int LeaveApprovedSave(int leaveId,LeaveVm leaveVm);
+        List<LeaveVm> LeaveHistoryManager(string emailId);
 
     }
 }

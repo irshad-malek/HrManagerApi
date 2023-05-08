@@ -136,6 +136,7 @@ namespace Hrmanagement.Repository.Repository
             leave.ManagerId = _context.Managers.Where(x => x.EmpId == leave.EmpId).Select(x => x.ManagerId).First();
             leave.IsApply = true;
             leave.IsAccepted = false;
+            leave.IsRejected = false;
             await _context.AddAsync(leave);
             _context.SaveChangesAsync();
             return leave.LeaveId;
@@ -152,6 +153,27 @@ namespace Hrmanagement.Repository.Repository
                 _context.SaveChanges();
             }
             return leave.LeaveId;
+        }
+
+        public List<LeaveVm> leaveHistory(string emailId)
+        {
+            return this._context.Leaves.Where(x => x.Emp.EmailId == emailId && x.IsApply == true).Select(x => new LeaveVm
+            {
+                LeaveId = x.LeaveId,
+                LeaveTypeId = x.LeaveTypeId,
+                Fromdate = x.Fromdate,
+                ToDate = x.ToDate,
+                Reason = x.Reason,
+                SeniorEmpName = x.Manager.EmpIdMgrNavigation.FirstName,
+                Contact = x.Contact,
+                FirstName = x.Emp.FirstName,
+                SId = x.SId,
+                LeaveType = x.LeaveType.LeaveTypes,
+                IsAccepted = x.IsAccepted,
+                EmpId = x.EmpId,
+                IsApply = x.IsApply,
+                IsRejected = x.IsRejected,
+            }).Where(x => x.IsAccepted == true || x.IsRejected==true).ToList();
         }
     }
 }

@@ -26,4 +26,15 @@ public partial class EmployeeSalaryVm
     public bool? IsActive { get; set; }
 
     public string? FirstName { get; set; }
+
+    public string? LastName { get; set;}
+
+    public string? DepartmentName { get; set; }
+
+    public string? Designation { get; set; }
+
+    public string? EmployeeRole { get;set; }
+    public string? EmailAddress { get; set;}
+
+    public decimal? TotalSalary { get; set;}
 }

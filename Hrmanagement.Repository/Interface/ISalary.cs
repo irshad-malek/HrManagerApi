@@ -24,5 +24,7 @@ namespace Hrmanagement.Repository.Interface
 
         //public int DeleteEmpSalary(int sId);
 
+        List<EmployeeSalaryVm> getSpecificEmployeeSalary(string emailId);
+
     }
 }
