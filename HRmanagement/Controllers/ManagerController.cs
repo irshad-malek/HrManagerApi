@@ -103,6 +103,12 @@ namespace HRmanagement.Controllers
         {
             return this.manager.LeaveApprovedByManager(emailId);
         }
+        [HttpGet]
+        [Route("LeaveHistoryManager/{emailId}")]
+        public List<LeaveVm> LeaveHistoryManager(string emailId)
+        {
+            return this.manager.LeaveHistoryManager(emailId);
+        }
         [HttpPut]
         [Route("LeaveApprovedSave/{leaveId}")]
 

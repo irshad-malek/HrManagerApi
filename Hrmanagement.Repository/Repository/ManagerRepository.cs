@@ -122,13 +122,38 @@ namespace Hrmanagement.Repository.Repository
                                  IsApply=ME.IsApply,
                                  FirstName=ME.Emp.FirstName,
                                  IsAccepted=ME.IsAccepted,
+                                 IsRejected=ME.IsRejected,
 
 
-                              }).Where(x=>x.IsAccepted==false).ToList();
+                              }).Where(x=>x.IsAccepted==false && x.IsRejected==false && x.IsApply==true).ToList();
 
             return dataobject;
         }
+        
+             public List<LeaveVm> LeaveHistoryManager(string emailId)
+        {
+            var dataobject = (from ME in _context.Leaves
+                              join RT in _context.Managers on ME.ManagerId equals RT.ManagerId
+                              where RT.EmpIdMgrNavigation.EmailId == emailId
 
+                              select new LeaveVm
+                              {
+                                  LeaveId = ME.LeaveId,
+                                  LeaveType = ME.LeaveType.LeaveTypes,
+                                  Fromdate = ME.Fromdate,
+                                  ToDate = ME.ToDate,
+                                  Contact = ME.Contact,
+                                  Reason = ME.Reason,
+                                  IsApply = ME.IsApply,
+                                  FirstName = ME.Emp.FirstName,
+                                  IsAccepted = ME.IsAccepted,
+                                  IsRejected = ME.IsRejected,
+
+
+                              }).Where(x => x.IsAccepted == true || x.IsRejected == true).ToList();
+
+            return dataobject;
+        }
         public int LeaveApprovedSave(int leaveId,LeaveVm leaveVm)
         {
             Leave leave = new();
@@ -136,7 +161,7 @@ namespace Hrmanagement.Repository.Repository
             {
                 leave = _context.Leaves.FirstOrDefault(x => x.LeaveId == leaveId);
                 leave.IsAccepted = leaveVm.IsAccepted;
-
+                leave.IsRejected = leaveVm.IsRejected;
                 _context.Leaves.Update(leave);
                 _context.SaveChanges();
             }

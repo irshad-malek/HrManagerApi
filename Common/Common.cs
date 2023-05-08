@@ -13,14 +13,14 @@ namespace Hrmanagement.Common
 
         public T Data { get; set; }
 
-        public static Common<T> SuccessResponse(T data)
-        {
-            return new Common<T> { Success = true, Data = data };
-        }
+        //public static Common<T> SuccessResponse(T data)
+        //{
+        //    return new Common<T> { Success = true, Data = data };
+        //}
 
-        public static Common<T> ErrorResponse(string errorMessage)
-        {
-            return new Common<T> { Success = false, Message = errorMessage };
-        }
+        //public static Common<T> ErrorResponse(string errorMessage)
+        //{
+        //    return new Common<T> { Success = false, Message = errorMessage };
+        //}
     }
 }

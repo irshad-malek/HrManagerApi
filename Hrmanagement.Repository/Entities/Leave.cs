@@ -27,6 +27,8 @@ public partial class Leave
 
     public int? SId { get; set; }
 
+    public bool? IsRejected { get; set; }
+
     public virtual Employee? Emp { get; set; }
 
     public virtual LeaveType? LeaveType { get; set; }

@@ -120,7 +120,6 @@ namespace Hrmanagement.Repository.Repository
             bool result=false;
 
             result=this.hrManagerContext.Employees.Where(x=>x.EmailId==emailId).Any();  
-
             return result;
         }
 
@@ -134,6 +133,24 @@ namespace Hrmanagement.Repository.Repository
             }
             
             return result;
+        }
+
+        public List<EmployeeVm> getSpecificEmployee(string emailId)
+        {
+            return this.hrManagerContext.Employees.Where(x=>x.EmailId == emailId).Select(x=> new EmployeeVm
+            {
+                EmpId = x.EmpId,
+                FirstName = x.FirstName,
+                LastName = x.LastName,
+                Gender = x.Gender,
+                MobileNo = x.MobileNo,
+                EmailId = x.EmailId,
+                Address = x.Address,
+                DepartmentName = x.Dept.DeptName,
+                DesignationName = x.Desg.DesName,
+                EmployeeTypes = x.EmpType.EmployeeTypes,
+                ManagerName=this.hrManagerContext.Managers.Where(y=>y.EmpId==x.EmpId).Select(y=>y.EmpIdMgrNavigation.FirstName).First()
+            }).ToList();
         }
     }
 }

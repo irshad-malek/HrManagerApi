@@ -132,7 +132,13 @@ namespace HRmanagement.Controllers
             }
             
         }
-        
+        [HttpGet]
+        [Route("getSpecificEmployeeSalary/{emailId}")]
+
+        public List<EmployeeSalaryVm> getSpecificEmployeeSalary(string emailId)
+        {
+            return this.salary.getSpecificEmployeeSalary(emailId);
+        }
 
     }
 }

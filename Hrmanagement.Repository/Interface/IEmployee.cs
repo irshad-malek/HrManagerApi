@@ -23,5 +23,7 @@ namespace Hrmanagement.Repository.Interface
         bool employeeEmailExist(string emailId);
 
         bool getTypeEmployees(string emailId);
+
+        List<EmployeeVm> getSpecificEmployee(string emailId);
     }
 }

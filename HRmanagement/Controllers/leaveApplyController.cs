@@ -140,7 +140,12 @@ namespace HRmanagement.Controllers
         {
             return this.leaveApply.LeaveWithdraw(leaveId, leaveVm);
         }
+        [HttpGet]
+        [Route("leaveHistory/{emailId}")]
 
+        public List<LeaveVm> leaveHistory(string emailId) { 
+            return this.leaveApply.leaveHistory(emailId);
+        }
 
 
     }

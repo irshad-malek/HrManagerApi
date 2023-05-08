@@ -23,7 +23,8 @@ namespace Hrmanagement.Repository.Interface
         Task<List<ManagerVm>> getManager(string email);
 
         int LeaveWithdraw(int leaveId,LeaveVm leaveVm);
-        
+
+        List<LeaveVm> leaveHistory(string emailId);
 
     }
 }
